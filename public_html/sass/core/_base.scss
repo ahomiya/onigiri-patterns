@@ -1,0 +1,143 @@
+// Base Styles
+
+// A Base rule is applied to an element using an element selector,
+// a descendent selector, or a child selector, along with any pseudo-classes.
+// It is defining the default styling for how that element should look in
+// all occurrences on the page.
+// -----------------------------------------------------------------------------
+
+// Defaults
+// Tell the browser to consider border and padding as part of the width of
+// an object rather than as an addition.
+* {
+	&,
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
+}
+
+html {
+	font: {                                      // Default font
+		family: $font-style-base;
+		size: $font-size-base;
+		style: normal;
+		weight: normal;
+	}
+	-webkit-tap-highlight-color: transparent;    // Tapping highlight
+	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	background-color: $bkg-color-base;
+	color: $color-base;
+	line-height: $line-height-base;
+}
+
+// -----------------------------------------------------------------------------
+// Links
+a {
+	color: $link-color-normal;
+	text-decoration: none;
+  &:hover {
+    color: $link-color-hover;
+    text-decoration: underline;
+  }
+  &:active {
+    color: $link-color-active;
+  }
+}
+// -----------------------------------------------------------------------------
+// Text-level semantics
+
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: normal;
+}
+
+// Body text
+p { line-height: normal; }
+
+// Emphasis & misc
+b,
+strong,
+i,
+em {
+	font: {
+		style: normal;
+		weight: normal;
+	}
+}
+
+b,
+strong {
+	font-family: $font-style-bold;
+}
+
+i,
+em {
+	font-family: $font-style-italic;
+}
+
+small { font-size: 100%; }
+
+mark { background-color: transparent; }
+// -----------------------------------------------------------------------------
+// Embedded content
+img { vertical-align: middle; }
+
+// -----------------------------------------------------------------------------
+// Grouping content
+hr {
+
+}
+
+// -----------------------------------------------------------------------------
+// Forms
+form {
+	
+}
+
+// -----------------------------------------------------------------------------
+// Tables
+table {
+	background-color: transparent;
+	max-width: 100%;
+}
+
+th { text-align: left; }
+
+// -----------------------------------------------------------------------------
+// Pseudo-elements
+::-moz-selection {
+  background: $color-selection;
+  text-shadow: none;
+}
+
+::selection {
+  background: $color-selection;
+  text-shadow: none;
+}
+
+// -----------------------------------------------------------------------------
+// Placeholder
+$placeholder-color-normal   : #666;
+$placeholder-color-error    : red;
+$placeholder-color-disabled : #999;
+
+::-webkit-input-placeholder {                                                     // WebKit
+  position: relative;
+  top: 2px;                                                                       // iOS 7
+  top: 0;
+  @include placeholder($placeholder-color-normal);
+}
+
+::-moz-placeholder          { @include placeholder($placeholder-color-normal); }  // Firefox 19+
+:-moz-placeholder           { @include placeholder($placeholder-color-normal); }  // Firefox 18-
+input:-ms-input-placeholder { @include placeholder($placeholder-color-normal); }  // IE10+
+[placeholder].placeholder   { @include placeholder($placeholder-color-normal); }  // IE9

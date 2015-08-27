@@ -1,0 +1,15 @@
+/* TEAM */
+Chef developer: ahomiya.com
+Contact: hello (at) ahomiya.com
+Website: http://www.ahomiya.com
+GitHub project: https://github.com/ahomiya/onigiri-patterns
+From: Chiang Mai, Thailand
+
+/* SITE */
+Last update: 2015/08/09
+Language: English
+Doctype: HTML5
+Standards: HTML5, CSS3, JavaScript
+Libraries: Modernizr, jQuery, enquire.js
+Frameworks: Toolkit
+Software: OS X, Sublime Text, MAMP, Tower, Transmit, Photoshop, Mou

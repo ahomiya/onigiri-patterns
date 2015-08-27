@@ -1,0 +1,90 @@
+@charset "UTF-8";
+/**
+ * Project                            : Onigiri Patterns
+ * CSS preprocessor                   : SASS
+ * CSS authoring frameworks           : Toolkit
+ * CSS resets / normalization         : Reset.css, Normalize.css
+ * Features detection library         : Modernizr
+ * Front-end template                 : Onigiri
+ * Design approach                    : Mobile first
+ * Developers                         : ahomiya.com
+ */
+
+// -----------------------------------------------------------------------------
+// Frameworks
+
+// CSS authoring framework
+// Streamlines development by providing a number of utilities and tools
+// to make writing CSS files easier and faster.
+
+// Function and mixin libraries
+@import "./components/package/toolkit/dist/sass/toolkit";
+
+// Front-end frameworks
+// A collection of tools for creating websites and web applications.
+// @import "./components/package/placeholder";
+
+// 3rd party plugins
+// @import "./components/package/placeholder";
+
+// Vendor
+@import "vendor/variables";           // Variables & configurations
+
+// -----------------------------------------------------------------------------
+// Global variabls & settings
+
+@import "settings";                   // Settings
+
+// -----------------------------------------------------------------------------
+// Helpers
+// SASS functions, mixins, and placeholder classes.
+
+@import "helpers/functions";          // Functions
+@import "helpers/mixins";             // Mixins
+@import "helpers/placeholders";       // Placeholders
+@import "helpers/utilities";          // Utilities
+
+// -----------------------------------------------------------------------------
+// Core
+// Represents the tools and materials required at the ground level of a project.
+// It provides the initial setup for an application.
+
+@import "core/normalization";         // CSS Resets and Normailization
+@import "core/base";                  // Base-level styles
+
+// -----------------------------------------------------------------------------
+// Layout
+// A Layout rules divide the page into sections. Layouts hold one or more
+// components or modules together.
+
+@import "layout/grid";                // Grid
+@import "layout/wrapper";             // Wrapper
+@import "layout/main";                // Main content
+@import "layout/header";              // Header
+@import "layout/footer";              // Footer
+
+// -----------------------------------------------------------------------------
+// Components
+// Styles for specific user interface elements which are broken down into
+// different component files. The component styles are purely interface driven
+// and have nothing to do with the core business logic of the website.
+
+@import "components/typography";      // Typography
+
+// -----------------------------------------------------------------------------
+// Modules
+// Styles for different sections of a page, which are determined by
+// business needs.
+
+@import "modules/navbar";             // Navbar
+
+// -----------------------------------------------------------------------------
+// Pages
+// Page-specific styles
+
+@import "pages/index";                // Index
+
+// -----------------------------------------------------------------------------
+// Quick styles
+
+@import "inbox";                      // Inbox
