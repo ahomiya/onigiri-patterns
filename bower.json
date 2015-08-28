@@ -19,7 +19,16 @@
     "matchMedia": "0.2.0",
     "toolkit": "https://github.com/ahomiya/toolkit.git",
     "ua-detection-js": "https://github.com/ahomiya/ua-detection-js.git",
-    "smartresize": "https://github.com/louisremi/jquery-smartresize.git"
+    "smartresize": "https://github.com/louisremi/jquery-smartresize.git",
+    "fancybox": "2.1.5",
+    "tooltipster": "3.3.0",
+    "jquery.ui": "1.11.4",
+    "spin.js": "2.3.2",
+    "jScrollPane": "2.0.22",
+    "slick.js": "1.5.8",
+    "superfish": "1.7.6",
+    "jQuery.mmenu": "5.4.0",
+    "select2": "4.0.0"
   },
   "resolutions": {
     "jquery": "2"
