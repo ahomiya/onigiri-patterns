@@ -24,7 +24,8 @@
     "tooltipster": "~3.3.0",
     "jquery.ui": "~1.11.4",
     "spin.js": "~2.3.2",
-    "jScrollPane": "~2.0.22"
+    "jScrollPane": "~2.0.22",
+    "slick.js": "~1.5.8"
   },
   "resolutions": {
     "jquery": "2"
