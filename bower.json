@@ -26,7 +26,8 @@
     "spin.js": "~2.3.2",
     "jScrollPane": "~2.0.22",
     "slick.js": "~1.5.8",
-    "superfish": "~1.7.6"
+    "superfish": "~1.7.6",
+    "jQuery.mmenu": "~5.4.0"
   },
   "resolutions": {
     "jquery": "2"
