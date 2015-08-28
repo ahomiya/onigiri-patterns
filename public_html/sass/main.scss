@@ -76,13 +76,47 @@
 // and have nothing to do with the core business logic of the website.
 
 @import "components/typography";      // Typography
+@import "components/buttons";         // Buttons
+@import "components/button-group";    // Button group
+@import "components/input-group";     // Input group
+@import "components/forms";           // Forms
+@import "components/jumbotron";       // Jumbotron
+@import "components/labels";          // Labels
+@import "components/alert";           // Alerts
+@import "components/card";            // Cards
+@import "components/navbar";          // Navbar
+@import "components/breadcrumb";      // Breadcrumb
+@import "components/pagination";      // Pagination
+@import "components/progress";        // Progress
+@import "components/list-group";      // List group
+@import "components/thumbnail";       // Thumbnails
+@import "components/panel";           // ​Panels
+@import "components/flyout";          // Flyout
+@import "components/toolbar";         // Toolbar
+@import "components/search-bar";      // Search bar
+@import "components/filter-bar";      // Filter bar
+@import "components/flex-media";      // Flex media
+@import "components/overlay";         // Overlay
+@import "components/stickynav";       // Stickynav
+@import "components/accordion";       // Accordion
+@import "components/tabs";            // Tabs
+@import "components/datepicker";      // Datepicker
+@import "components/tooltip";         // Tooltip
+@import "components/popover";         // Popovers
+@import "components/selectbox";       // Select boxes
+@import "components/lightbox";        // Lightbox
+@import "components/spinner";         // Spinner
+@import "components/scrollbar";       // Scrollbar
+@import "components/slider";          // Slider
+@import "components/dropdown-menu";   // Dropdown menu
+@import "components/offcanvas-menu";  // Off-canvas menu
 
 // -----------------------------------------------------------------------------
 // Modules
 // Styles for different sections of a page, which are determined by
 // business needs.
 
-@import "modules/navbar";             // Navbar
+@import "modules/navigation";         // Navigation
 
 // -----------------------------------------------------------------------------
 // Pages
