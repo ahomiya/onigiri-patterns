@@ -83,7 +83,11 @@ var components      = {
       componentPackage + '/matchMedia/matchMedia.js',
       componentPackage + '/matchMedia/matchMedia.addListener.js'
     ],
-    plugins: []
+    plugins: [
+      componentPackage + '/jquery.ui/ui/core.js',
+      componentPackage + '/jquery.ui/ui/widget.js',
+      componentPackage + '/jquery.ui/ui/accordion.js'
+    ]
   }
 
 };

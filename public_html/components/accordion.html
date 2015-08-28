@@ -22,15 +22,71 @@
       <li><a href="https://github.com/jquery/jquery-ui" target="_blank">Repository</a></li>
     </ul>
 
+    <div id="accordion">
+      <h3>Section 1</h3>
+      <div>
+        <p>
+        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        </p>
+      </div>
+      <h3>Section 2</h3>
+      <div>
+        <p>
+        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+        suscipit faucibus urna.
+        </p>
+      </div>
+      <h3>Section 3</h3>
+      <div>
+        <p>
+        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+          <li>List item one</li>
+          <li>List item two</li>
+          <li>List item three</li>
+        </ul>
+      </div>
+      <h3>Section 4</h3>
+      <div>
+        <p>
+        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+        mauris vel est.
+        </p>
+        <p>
+        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+        inceptos himenaeos.
+        </p>
+      </div>
+    </div>
+
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
     <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/tracking.js"></script>
     <script>
       $(document).ready(function() {
 
-
+        // Plugin     : jQuery UI - Accordion
+        // Widget     : https://jqueryui.com/accordion/
+        // API        : http://api.jqueryui.com/accordion/
+        // Repository : https://github.com/jquery/jquery-ui
+        $('#accordion').accordion({
+          collapsible: true
+        });
 
       });
     </script>
