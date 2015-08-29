@@ -23,6 +23,14 @@
 
 
 // -----------------------------------------------------------------------------
-// Module	: Debugging
+// Module	: Dummy container
 // Author	: ahomiya.com
 // E-mail	: hello@ahomiya.com
+
+.container-dummy {
+  p {
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 30px;
+  }
+}
