@@ -87,7 +87,8 @@ var components      = {
       componentPackage + '/jquery.ui/ui/core.js',
       componentPackage + '/jquery.ui/ui/widget.js',
       componentPackage + '/jquery.ui/ui/accordion.js',
-      componentPackage + '/jquery.ui/ui/tabs.js'
+      componentPackage + '/jquery.ui/ui/tabs.js',
+      componentPackage + '/jquery.ui/ui/datepicker.js'
     ]
   }
 

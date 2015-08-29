@@ -1,5 +1,11 @@
 // Datepicker
 
-.datepicker {
+// Plugin     : jQuery UI - Datepicker
+// Widget     : https://jqueryui.com/datapicker/
+// API        : http://api.jqueryui.com/datapicker/
+// Repository : https://github.com/jquery/jquery-ui
+// CSS prefix : .ui-datapicker
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/jquery.ui/themes/base/datapicker";
