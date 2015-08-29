@@ -8,10 +8,19 @@ $font-style-bold             : Font-Bold;
 $font-style-light            : Font-Light;
 $font-style-italic           : Font-Italic;
 
-$font-family-websafe         : Arial, Helvetica, sans-serif;
+$font-style-websafe          : Arial, Helvetica, sans-serif;
+$font-style-default          : "HelveticaNeue-Light",
+                               "Helvetica Neue Light",
+                               "Helvetica Neue",
+                               Helvetica,
+                               Arial,
+                               "Lucida Grande",
+                               sans-serif;
 
-$font-style-base             : $font-style-regular;
+$font-style-base             : $font-style-default;
 $font-size-base              : 16px;
+
+$font-weight-base            : 300;
 
 
 // Line-height
