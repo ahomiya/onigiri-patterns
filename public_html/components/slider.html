@@ -21,15 +21,37 @@
       <li><a href="https://github.com/kenwheeler/slick/" target="_blank">Repository</a></li>
     </ul>
 
+    <div style="background-color: #3498db; margin: 0 auto; padding: 0 50px; width: 80%;">
+
+      <div id="slider">
+        <div><img src="http://farm1.staticflickr.com/291/18653638823_a86b58523c_m.jpg" alt=""></div>
+        <div><img src="http://farm4.staticflickr.com/3826/18875570170_e20cf27a4d_m.jpg" alt=""></div>
+        <div><img src="http://farm1.staticflickr.com/471/19102574835_d5a7837217_m.jpg" alt=""></div>
+        <div><img src="http://farm1.staticflickr.com/288/19353466834_6be3600330_m.jpg" alt=""></div>
+        <div><img src="http://farm1.staticflickr.com/313/19831416459_5ddd26103e_m.jpg" alt=""></div>
+        <div><img src="http://farm6.staticflickr.com/5444/17679973232_568353a624_m.jpg" alt=""></div>
+      </div>
+
+    </div>
+
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
     <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/tracking.js"></script>
     <script>
       $(document).ready(function() {
 
-
+        // Plugin        : slick.js
+        // Documentation : http://kenwheeler.github.io/slick/
+        // Repository    : https://github.com/kenwheeler/slick/
+        $('#slider').slick({
+          dots           : true,
+          infinite       : true,
+          slidesToShow   : 3,
+          slidesToScroll : 1
+        });
 
       });
     </script>

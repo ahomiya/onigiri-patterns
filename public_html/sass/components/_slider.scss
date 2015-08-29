@@ -1,5 +1,11 @@
-// Slider
+// Slider / Carousel
 
-.slider {
+// Plugin        : slick.js
+// Documentation : http://kenwheeler.github.io/slick/
+// Repository    : https://github.com/kenwheeler/slick/
+// CSS prefix    : .slick-
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/slick.js/slick/slick";
+@import "./components/package/slick.js/slick/slick-theme";
