@@ -1,5 +1,10 @@
 // Lightbox
 
-.lightbox {
+// Plugin        : fancyBox
+// Documentation : http://fancyapps.com/fancybox/
+// Repository    : https://github.com/fancyapps/fancyBox
+// CSS prefix    : .fancybox-
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/fancybox/source/jquery.fancybox";

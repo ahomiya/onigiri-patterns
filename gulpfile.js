@@ -89,7 +89,8 @@ var components      = {
       componentPackage + '/jquery.ui/ui/accordion.js',
       componentPackage + '/jquery.ui/ui/tabs.js',
       componentPackage + '/jquery.ui/ui/datepicker.js',
-      componentPackage + '/superfish/dist/js/superfish.js'
+      componentPackage + '/superfish/dist/js/superfish.js',
+      componentPackage + '/fancybox/source/jquery.fancybox.js'
     ]
   }
 
