@@ -1,5 +1,10 @@
 // Select boxes
 
-.selectbox {
+// Plugin        : jScrollPane
+// Documentation : http://jscrollpane.kelvinluck.com
+// Repository    : https://github.com/vitch/jScrollPane
+// CSS prefix    : .select2-
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/select2/dist/css/select2";

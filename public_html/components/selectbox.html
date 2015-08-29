@@ -21,15 +21,30 @@
       <li><a href="https://github.com/select2/select2" target="_blank">Repository</a></li>
     </ul>
 
+    <select id="selectbox">
+      <option value="0" selected>Option 0</option>
+      <option value="1">Option 1 - Chiang Mai</option>
+      <option value="2">Option 2 - Bangkok</option>
+      <option value="3">Option 3 - Yokohama</option>
+      <option value="4">Option 4 - United Kingdom</option>
+      <option value="5">Haniba</option>
+    </select>
+
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
     <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/tracking.js"></script>
     <script>
       $(document).ready(function() {
 
-
+        // Plugin        : jScrollPane
+        // Documentation : http://jscrollpane.kelvinluck.com
+        // Repository    : https://github.com/vitch/jScrollPane
+        $('#selectbox').select2({
+          minimumResultsForSearch: Infinity
+        });
 
       });
     </script>
