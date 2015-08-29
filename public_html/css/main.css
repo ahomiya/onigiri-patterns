@@ -705,35 +705,35 @@ th {
   top: 2px;
   top: 0;
   color: #666;
-  font-family: Font-Regular;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 11px;
   opacity: 1;
 }
 
 ::-moz-placeholder {
   color: #666;
-  font-family: Font-Regular;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 11px;
   opacity: 1;
 }
 
 :-moz-placeholder {
   color: #666;
-  font-family: Font-Regular;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 11px;
   opacity: 1;
 }
 
 input:-ms-input-placeholder {
   color: #666;
-  font-family: Font-Regular;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 11px;
   opacity: 1;
 }
 
 [placeholder].placeholder {
   color: #666;
-  font-family: Font-Regular;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 11px;
   opacity: 1;
 }
@@ -1718,20 +1718,6 @@ input:-ms-input-placeholder {
 .sf-arrows ul li:hover > .sf-with-ul:after,
 .sf-arrows ul .sfHover > .sf-with-ul:after {
   border-left-color: white;
-}
-
-.readme p {
-  margin-bottom: 15px;
-}
-
-.console {
-  border-top: #ccc dotted 1px;
-  margin: 15px 0;
-  padding-top: 15px;
-}
-
-.console-headline {
-  font-family: Font-Bold;
 }
 
 /*# sourceMappingURL=../sourcemaps/main.css.map */
