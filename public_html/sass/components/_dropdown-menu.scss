@@ -1,5 +1,10 @@
 // Dropdown menu
 
-.dropdown-menu {
+// Plugin        : Superfish
+// Documentation : http://users.tpg.com.au/j_birch/plugins/superfish/
+// Repository    : https://github.com/joeldbirch/superfish
+// CSS prefix    : .sf-
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/superfish/dist/css/superfish";
