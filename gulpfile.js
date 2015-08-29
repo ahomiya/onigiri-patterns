@@ -95,7 +95,8 @@ var components      = {
       componentPackage + '/spin.js/spin.js',
       componentPackage + '/tooltipster/js/jquery.tooltipster.js',
       componentPackage + '/jScrollPane/script/jquery.mousewheel.js',
-      componentPackage + '/jScrollPane/script/jquery.jscrollpane.js'
+      componentPackage + '/jScrollPane/script/jquery.jscrollpane.js',
+      componentPackage + '/select2/dist/js/select2.js'
     ]
   }
 
