@@ -21,15 +21,29 @@
       <li><a href="https://github.com/fancyapps/fancyBox" target="_blank">Repository</a></li>
     </ul>
 
+    <a id="lightbox-image" href="http://farm1.staticflickr.com/291/18653638823_a86b58523c_b.jpg" title="Lupines (Kiddi Einars)">
+      <img src="http://farm1.staticflickr.com/291/18653638823_a86b58523c_m.jpg" alt="">
+    </a>
+
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
     <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/tracking.js"></script>
     <script>
       $(document).ready(function() {
 
-
+        // Plugin        : fancyBox
+        // Documentation : http://fancyapps.com/fancybox/
+        // Repository    : https://github.com/fancyapps/fancyBox
+        $('#lightbox-image').fancybox({
+          helpers: {
+            title : {
+              type : 'float'
+            }
+          }
+        });
 
       });
     </script>
