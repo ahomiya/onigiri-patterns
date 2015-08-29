@@ -39,12 +39,16 @@
 // -----------------------------------------------------------------------------
 // Functions
 // Make reusable logic more useful.
-@import "helpers/functions/global";   // Functions
+@import "functions/global";           // Functions
 
 // Mixins
 // Define patterns of property value pairs, which can then be reused in
 // other rulesets.
-@import "helpers/mixins/global";      // Global
+@import "mixins/global";              // Global
+@import "mixins/bootstrap";           // Bootstrap
+@import "mixins/hover";               // Hover
+@import "mixins/tab-focus";           // Tab focus
+@import "mixins/buttons";             // Buttons
 
 // Placeholders & utilitie classes
 @import "helpers/placeholders";       // Placeholders
