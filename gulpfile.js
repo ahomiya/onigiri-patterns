@@ -90,7 +90,8 @@ var components      = {
       componentPackage + '/jquery.ui/ui/tabs.js',
       componentPackage + '/jquery.ui/ui/datepicker.js',
       componentPackage + '/superfish/dist/js/superfish.js',
-      componentPackage + '/fancybox/source/jquery.fancybox.js'
+      componentPackage + '/fancybox/source/jquery.fancybox.js',
+      componentPackage + '/slick.js/slick/slick.js'
     ]
   }
 
