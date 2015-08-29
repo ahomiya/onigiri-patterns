@@ -1,5 +1,11 @@
 // Tabs
 
-.tabs {
+// Plugin     : jQuery UI - Tabs
+// Widget     : https://jqueryui.com/tabs/
+// API        : http://api.jqueryui.com/tabs/
+// Repository : https://github.com/jquery/jquery-ui
+// CSS prefix : .ui-tabs
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/jquery.ui/themes/base/tabs";

@@ -86,7 +86,8 @@ var components      = {
     plugins: [
       componentPackage + '/jquery.ui/ui/core.js',
       componentPackage + '/jquery.ui/ui/widget.js',
-      componentPackage + '/jquery.ui/ui/accordion.js'
+      componentPackage + '/jquery.ui/ui/accordion.js',
+      componentPackage + '/jquery.ui/ui/tabs.js'
     ]
   }
 
