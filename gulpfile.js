@@ -92,7 +92,8 @@ var components      = {
       componentPackage + '/superfish/dist/js/superfish.js',
       componentPackage + '/fancybox/source/jquery.fancybox.js',
       componentPackage + '/slick.js/slick/slick.js',
-      componentPackage + '/spin.js/spin.js'
+      componentPackage + '/spin.js/spin.js',
+      componentPackage + '/tooltipster/js/jquery.tooltipster.js'
     ]
   }
 

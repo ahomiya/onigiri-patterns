@@ -21,15 +21,35 @@
       <li><a href="https://github.com/iamceege/tooltipster/" target="_blank">Repository</a></li>
     </ul>
 
+    <span data-tooltip="Chiang Mai, Thailand" data-position="right" data-offset-y="0" data-offset-x="0" id="tooltip">Tooltip</span>
+
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
     <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/tracking.js"></script>
     <script>
       $(document).ready(function() {
 
+        // Plugin        : Tooltipster
+        // Documentation : http://iamceege.github.io/tooltipster/
+        // Repository    : https://github.com/iamceege/tooltipster/
+        $('#tooltip').exists(function(event) {
 
+          $('#tooltip').tooltipster({
+            content       : $(this).data('tooltip'),
+            position      : $(this).data('position'),
+            trigger       : 'hover',
+            arrowColor    : '#ededed',
+            offsetY       : $(this).data('offset-y'),
+            offsetX       : $(this).data('offset-x'),
+            animation     : 'fade',
+            theme         : 'tooltipster-light',
+            contentAsHTML : true
+          });
+
+        });
 
       });
     </script>
