@@ -1,5 +1,11 @@
 // Tooltip
 
-.tooltip {
+// Plugin        : Tooltipster
+// Documentation : http://iamceege.github.io/tooltipster/
+// Repository    : https://github.com/iamceege/tooltipster/
+// CSS prefix    : .tooltipster-
+// -----------------------------------------------------------------------------
 
-}
+// Vendor
+@import "./components/package/tooltipster/css/tooltipster";
+@import "./components/package/tooltipster/css/themes/tooltipster-light";
