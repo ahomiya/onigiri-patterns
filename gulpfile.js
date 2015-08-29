@@ -93,7 +93,9 @@ var components      = {
       componentPackage + '/fancybox/source/jquery.fancybox.js',
       componentPackage + '/slick.js/slick/slick.js',
       componentPackage + '/spin.js/spin.js',
-      componentPackage + '/tooltipster/js/jquery.tooltipster.js'
+      componentPackage + '/tooltipster/js/jquery.tooltipster.js',
+      componentPackage + '/jScrollPane/script/jquery.mousewheel.js',
+      componentPackage + '/jScrollPane/script/jquery.jscrollpane.js'
     ]
   }
 
