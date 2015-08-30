@@ -381,7 +381,7 @@ $hr-border-width:             $border-width !default;
 $line-height-lg:         (4 / 3) !default;
 $line-height-sm:         1.5 !default;
 
-$border-radius:          .25rem !default;
+$border-radius                  : .25rem !default;
 $border-radius-lg:       .3rem !default;
 $border-radius-sm:       .2rem !default;
 
@@ -683,15 +683,15 @@ $popover-arrow-outer-fallback-color:  darken($popover-fallback-border-color, 20%
 
 // Labels
 
-$label-default-bg:            $gray-light !default;
-$label-primary-bg:            $brand-primary !default;
-$label-success-bg:            $brand-success !default;
-$label-info-bg:               $brand-info !default;
-$label-warning-bg:            $brand-warning !default;
-$label-danger-bg:             $brand-danger !default;
+$label-default-bg               : $gray-light !default;
+$label-primary-bg               : $brand-primary !default;
+$label-success-bg               : $brand-success !default;
+$label-info-bg                  : $brand-info !default;
+$label-warning-bg               : $brand-warning !default;
+$label-danger-bg                : $brand-danger !default;
 
-$label-color:                 #fff !default;
-$label-link-hover-color:      #fff !default;
+$label-color                    : #fff !default;
+$label-link-hover-color         : #fff !default;
 
 
 // Modals
