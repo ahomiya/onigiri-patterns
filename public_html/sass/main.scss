@@ -39,20 +39,25 @@
 // -----------------------------------------------------------------------------
 // Functions
 // Make reusable logic more useful.
+
 @import "functions/global";           // Functions
 
+// -----------------------------------------------------------------------------
 // Mixins
 // Define patterns of property value pairs, which can then be reused in
 // other rulesets.
+
+// Utilities
 @import "mixins/global";              // Global
-@import "mixins/bootstrap";           // Bootstrap
+@import "mixins/toggles";             // Toggles
 @import "mixins/hover";               // Hover
 @import "mixins/tab-focus";           // Tab focus
-@import "mixins/buttons";             // Buttons
 
-// Placeholders & utilitie classes
-@import "helpers/placeholders";       // Placeholders
-@import "helpers/utilities";          // Utilities
+// Skins
+@import "mixins/border-radius";       // Border radius
+
+// Components
+@import "mixins/buttons";             // Buttons
 
 // -----------------------------------------------------------------------------
 // Core
@@ -61,6 +66,12 @@
 
 @import "core/normalization";         // CSS Resets and Normailization
 @import "core/base";                  // Base-level styles
+
+// -----------------------------------------------------------------------------
+// Helpers
+
+@import "helpers/placeholders";       // Placeholders
+@import "helpers/utilities";          // Utilities
 
 // -----------------------------------------------------------------------------
 // Layout

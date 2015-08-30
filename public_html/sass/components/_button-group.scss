@@ -1,5 +1,18 @@
 // Button group
 
-.btn-group {
+// Prototype     : Bootstrap
+// Documentation : http://v4-alpha.getbootstrap.com/components/button-group/
+// Component     : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_button-group.scss
+// CSS prefix    : .btn-group
+// -----------------------------------------------------------------------------
 
+.btn-group {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+
+  > .btn {
+    float: left;
+    position: relative;
+  }
 }
