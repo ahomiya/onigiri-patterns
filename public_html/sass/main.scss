@@ -45,9 +45,16 @@
 // Define patterns of property value pairs, which can then be reused in
 // other rulesets.
 @import "mixins/global";              // Global
-@import "mixins/bootstrap";           // Bootstrap
+
+// Utilities
+@import "mixins/toggles";             // Toggles
 @import "mixins/hover";               // Hover
 @import "mixins/tab-focus";           // Tab focus
+
+// Skins
+@import "mixins/border-radius";       // Border radius
+
+// Components
 @import "mixins/buttons";             // Buttons
 
 // Placeholders & utilitie classes
