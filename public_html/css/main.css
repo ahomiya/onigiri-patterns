@@ -621,6 +621,10 @@ img {
   vertical-align: middle;
 }
 
+[role="button"] {
+  cursor: pointer;
+}
+
 table {
   background-color: transparent;
 }

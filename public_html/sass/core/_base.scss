@@ -10,8 +10,9 @@
 // Component     : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_reboot.scss
 // -----------------------------------------------------------------------------
 
-// Box-sizing
+// HTML & Body
 
+// Box-sizing
 html {
   box-sizing: border-box;
 }
@@ -22,9 +23,7 @@ html {
   box-sizing: inherit;
 }
 
-// -----------------------------------------------------------------------------
-// HTML & Body
-
+// Defaults
 html {
   font-size: $font-size-root;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -42,6 +41,7 @@ body {
 
 // -----------------------------------------------------------------------------
 // Typography
+// Text-level semantics
 
 // Headings
 h1,
@@ -140,6 +140,13 @@ img {
 }
 
 // -----------------------------------------------------------------------------
+// iOS clickable elements
+
+[role="button"] {
+  cursor: pointer;
+}
+
+// -----------------------------------------------------------------------------
 // Tables
 
 table {
@@ -197,11 +204,6 @@ legend {
 input[type="search"] {
   -webkit-appearance: none;
 }
-
-// -----------------------------------------------------------------------------
-// Grouping content
-
-hr {}
 
 // -----------------------------------------------------------------------------
 // Pseudo-elements
