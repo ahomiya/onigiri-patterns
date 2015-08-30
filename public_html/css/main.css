@@ -608,6 +608,15 @@ a:focus {
   outline-offset: -2px;
 }
 
+pre {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
 img {
   vertical-align: middle;
 }
@@ -637,8 +646,8 @@ input,
 button,
 select,
 textarea {
-  margin: 0;
   line-height: inherit;
+  margin: 0;
 }
 
 textarea {
@@ -646,19 +655,19 @@ textarea {
 }
 
 fieldset {
+  border: 0;
+  margin: 0;
   min-width: 0;
   padding: 0;
-  margin: 0;
-  border: 0;
 }
 
 legend {
   display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: .5rem;
   font-size: 1.5rem;
   line-height: inherit;
+  margin-bottom: .5rem;
+  padding: 0;
+  width: 100%;
 }
 
 input[type="search"] {
