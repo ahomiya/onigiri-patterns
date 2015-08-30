@@ -1,5 +1,22 @@
 // Labels
 
-.label {
+// Prototype     : Bootstrap
+// Documentation : http://v4-alpha.getbootstrap.com/components/button-group/
+// Component     : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_labels.scss
+// Mixin         : https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_label.scss
+// CSS prefix    : .label-
+// -----------------------------------------------------------------------------
 
+.label {
+  background-color: $label-default-bg;
+  border-radius: $border-radius;
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: $label-color;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
 }

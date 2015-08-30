@@ -769,6 +769,20 @@ input:-ms-input-placeholder {
   position: relative;
 }
 
+.label {
+  background-color: #818a91;
+  border-radius: 0.25rem;
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
 /*!
  * jQuery UI Accordion 1.11.4
  * http://jqueryui.com
