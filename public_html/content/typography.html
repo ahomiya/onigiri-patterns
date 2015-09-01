@@ -12,20 +12,162 @@
     <!-- Utilities -->
     <script src="../js/vendor/libraries.features.js"></script>
   </head>
-  <body>
-    <h1>Typography</h1>
-    <ul>
-      <li>Prototype: Bootstrap</li>
-      <li><a href="http://v4-alpha.getbootstrap.com/content/typography/" target="_blank">Documentation</a></li>
-      <li><a href="https://github.com/twbs/bootstrap/blob/v4-dev/scss/_type.scss" target="_blank">Component</a></li>
-    </ul>
+  <body class="onigiri-docs">
+    <div class="onigiri-container">
+      <div class="onigiri-content">
+        <!-- Title -->
+        <h1 class="onigiri-title">Typography</h1>
+        <ul>
+          <li>Prototype: Bootstrap</li>
+          <li><a href="http://v4-alpha.getbootstrap.com/content/typography/" target="_blank">Documentation</a></li>
+          <li><a href="https://github.com/twbs/bootstrap/blob/v4-dev/scss/_type.scss" target="_blank">Component</a></li>
+        </ul>
+        <!-- /Title -->
 
-    <h1>h1. Bootstrap heading</h1>
-    <h2>h2. Bootstrap heading</h2>
-    <h3>h3. Bootstrap heading</h3>
-    <h4>h4. Bootstrap heading</h4>
-    <h5>h5. Bootstrap heading</h5>
-    <h6>h6. Bootstrap heading</h6>
+        <!-- Headings -->
+        <h2>Headings</h2>
+        <div class="onigiri-example">
+          <h1>h1. Bootstrap heading</h1>
+          <h2>h2. Bootstrap heading</h2>
+          <h3>h3. Bootstrap heading</h3>
+          <h4>h4. Bootstrap heading</h4>
+          <h5>h5. Bootstrap heading</h5>
+          <h6>h6. Bootstrap heading</h6>
+        </div>
+
+        <h3>Customizing headings</h3>
+        <div class="onigiri-example">
+          <h3>
+            Fancy display heading
+            <small class="text-muted">With faded secondary text</small>
+          </h3>
+        </div>
+        <!-- /Headings -->
+
+        <!-- Display headings -->
+        <h2>Display headings</h2>
+        <div class="onigiri-example">
+          <h1 class="display-4">Display 4</h1>
+          <h1 class="display-3">Display 3</h1>
+          <h1 class="display-2">Display 2</h1>
+          <h1 class="display-1">Display 1</h1>
+        </div>
+        <!-- /Display headings -->
+
+        <!-- Lead -->
+        <h2>Lead</h2>
+        <div class="onigiri-example">
+          <p class="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus.</p>
+        </div>
+        <!-- /Lead -->
+
+        <!-- Paragraphs -->
+        <h2>Paragraphs</h2>
+        <div class="onigiri-example">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+          <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+        </div>
+        <!-- /Paragraphs -->
+
+        <!-- Inline text elements -->
+        <h2>Inline text elements</h2>
+        <div class="onigiri-example">
+          <p>You can use the mark tag to <mark>highlight</mark> text.</p>
+          <p><del>This line of text is meant to be treated as deleted text.</del></p>
+          <p><s>This line of text is meant to be treated as no longer accurate.</s></p>
+          <p><ins>This line of text is meant to be treated as an addition to the document.</ins></p>
+          <p><u>This line of text will render as underlined</u></p>
+          <p><small>This line of text is meant to be treated as fine print.</small></p>
+          <p><strong>This line rendered as bold text.</strong></p>
+          <p><em>This line rendered as italicized text.</em></p>
+        </div>
+        <!-- /Inline text elements -->
+
+        <!-- Abbreviations -->
+        <h2>Abbreviations</h2>
+        <p>การย่อ, การตัดทอน, อักษรย่อ, ตัวย่อ</p>
+        <div class="onigiri-example">
+          <p><abbr title="attribute">attr</abbr></p>
+          <p><abbr title="HyperText Markup Language" class="initialism">HTML</abbr></p>
+        </div>
+        <!-- /Abbreviations -->
+
+        <!-- Blockquotes -->
+        <h2>Blockquotes</h2>
+        <p>การอ้างอิง</p>
+        <div class="onigiri-example">
+          <blockquote>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+          </blockquote>
+        </div>
+
+        <h3>Naming source</h3>
+        <div class="onigiri-example">
+          <blockquote class="blockquote">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+          </blockquote>
+        </div>
+
+        <h3>Reverse layout</h3>
+        <div class="onigiri-example">
+          <blockquote class="blockquote blockquote-reverse">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+          </blockquote>
+        </div>
+        <!-- /Blockquotes -->
+
+        <!-- Lists -->
+        <h2>Lists</h2>
+        <h3>Unstyled</h3>
+        <div class="onigiri-example">
+          <ul class="list-unstyled">
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Consectetur adipiscing elit</li>
+            <li>Integer molestie lorem at massa</li>
+            <li>Facilisis in pretium nisl aliquet</li>
+            <li>Nulla volutpat aliquam velit
+              <ul>
+                <li>Phasellus iaculis neque</li>
+                <li>Purus sodales ultricies</li>
+                <li>Vestibulum laoreet porttitor sem</li>
+                <li>Ac tristique libero volutpat at</li>
+              </ul>
+            </li>
+            <li>Faucibus porta lacus fringilla vel</li>
+            <li>Aenean sit amet erat nunc</li>
+            <li>Eget porttitor lorem</li>
+          </ul>
+        </div>
+
+        <h3>Inline</h3>
+        <div class="onigiri-example">
+          <ul class="list-inline">
+            <li>Lorem ipsum</li>
+            <li>Phasellus iaculis</li>
+            <li>Nulla volutpat</li>
+          </ul>
+        </div>
+
+        <h3>Horizontal description</h3>
+        <div class="onigiri-example">
+          <dl class="dl-horizontal">
+            <dt class="col-sm-3">Description lists</dt>
+            <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
+            <dt class="col-sm-3">Euismod</dt>
+            <dd class="col-sm-9">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+            <dd class="col-sm-9 col-sm-offset-3">Donec id elit non mi porta gravida at eget metus.</dd>
+            <dt class="col-sm-3">Malesuada porta</dt>
+            <dd class="col-sm-9">Etiam porta sem malesuada magna mollis euismod.</dd>
+            <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>
+            <dd class="col-sm-9">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+          </dl>
+        </div>
+        <!-- /Lists -->
+      </div>
+    </div>
 
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->

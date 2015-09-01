@@ -1,34 +1,188 @@
 // Typography
 // The bridge between base-level tags and modules.
+
+// Prototype     : Bootstrap
+// Documentation : http://v4-alpha.getbootstrap.com/content/typography/
+// Component     : https://github.com/twbs/bootstrap/blob/v4-dev/scss/_type.scss
 // -----------------------------------------------------------------------------
 
 // Headings
 
+ h1,  h2,  h3,  h4,  h5,  h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: $headings-color;
+  font: {
+    family: $headings-font-family;
+    weight: $headings-font-weight;
+  }
+  line-height: $headings-line-height;
+}
 
+ h1,  h2,  h3,
+.h1, .h2, .h3 {
+  margin-bottom: $headings-margin-bottom;
+}
+
+ h4,  h5,  h6,
+.h4, .h5, .h6 {
+  margin-bottom: $headings-margin-bottom;
+}
+
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
+h5, .h5 { font-size: $font-size-h5; }
+h6, .h6 { font-size: $font-size-h6; }
+
+.lead {
+  font: {
+    size: $lead-font-size;
+    weight: $lead-font-weight;
+  }
+}
+
+.display-1 {
+  font: {
+    size: $display1-size;
+    weight: $display1-weight;
+  }
+}
+.display-2 {
+  font: {
+    size: $display2-size;
+    weight: $display2-weight;
+  }
+}
+.display-3 {
+  font: {
+    size: $display3-size;
+    weight: $display3-weight;
+  }
+}
+.display-4 {
+  font: {
+    size: $display4-size;
+    weight: $display4-weight;
+  }
+}
 
 // -----------------------------------------------------------------------------
-// Body copy
+// Horizontal rules
 
-
+hr {
+  border: 0;
+  border-top: $hr-border-width solid $hr-border-color;
+  margin-bottom: $spacer-y;
+  margin-top: $spacer-y;
+}
 
 // -----------------------------------------------------------------------------
 // Emphasis
 
+ small,
+.small {
+  font: {
+    size: 80%;
+    weight: normal;
+  }
+}
 
+ mark,
+.mark {
+  background-color: $state-warning-bg;
+  padding: .2em;
+}
 
 // -----------------------------------------------------------------------------
 // Lists
 
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
 
+.list-inline {
+  list-style: none;
+  margin-left: -5px;
+  padding-left: 0;
+  > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.dl-horizontal {
+  @include clearfix;
+  margin-left: -$grid-gutter-width;
+  margin-right: -$grid-gutter-width;
+}
 
 // -----------------------------------------------------------------------------
-// Links
+// Misc
 
+.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
 
+.blockquote {
+  border-left: .25rem solid $blockquote-border-color;
+  font-size: $blockquote-font-size;
+  margin-bottom: $spacer;
+  padding: ($spacer / 2) $spacer;
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  footer {
+    color: $blockquote-small-color;
+    display: block;
+    font-size: 80%;
+    line-height:
+    &::before {
+      content: "\2014 \00A0";
+    }
+  }
+}
+
+.blockquote-reverse {
+  border-left: 0;
+  border-right: .25rem solid $blockquote-border-color;
+  padding-left: 0;
+  padding-right: $spacer;
+  text-align: right;
+
+  footer {
+    &::before {
+      content: "";
+    }
+    &::after {
+      content: "\00A0 \2014";
+    }
+  }
+}
 
 // -----------------------------------------------------------------------------
-// Utilities
+// Figures
 
+.figure {
+  display: inline-block;
 
-// -----------------------------------------------------------------------------
-// Custom Submodules
+  > img {
+    @extend .img-responsive;
+    line-height: 1;
+    margin-bottom: ($spacer-y / 2);
+  }
+}
+
+.figure-caption {
+  color: $gray-light;
+  font-size: 90%;
+}

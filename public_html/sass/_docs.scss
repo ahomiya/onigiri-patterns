@@ -1,0 +1,66 @@
+// Documentation
+
+.onigiri-docs {
+
+}
+
+.onigiri-container {
+  padding: 0 50px;
+}
+
+.onigiri-content {
+  > h2:not(:first-child) {
+    margin-top: 3rem;
+  }
+
+  > h3 {
+    margin-top: 1.5rem;
+  }
+}
+
+.onigiri-title {
+  font-size: 3rem;
+}
+
+.onigiri-example {
+  @include clearfix;
+  border: solid #f7f7f9;
+  border-width: .2rem;
+  margin: 1rem 0 0 0;
+  padding: 1.5rem;
+  position: relative;
+
+  & + .onigiri-highlight {
+    margin-top: 0;
+  }
+}
+
+.onigiri-highlight {
+margin: 1rem -1rem;
+background-color: #f7f7f9;
+
+padding: 1.5rem;
+margin-right: 0;
+margin-left: 0;
+
+  pre {
+padding: 0;
+margin-top: 0;
+margin-bottom: 0;
+background-color: transparent;
+border: 0;
+
+    code {
+    font-size: inherit;
+    color: #373a3c;
+    }
+  }
+}
+
+.nt {
+color: #2f6f9f;
+}
+
+code {
+  font-family: Menlo, Monaco,Consolas, "Courier New", monospace;
+}

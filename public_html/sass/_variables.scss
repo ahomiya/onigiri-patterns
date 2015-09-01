@@ -17,7 +17,7 @@ $font-family-default         : "HelveticaNeue-Light",
                                "Lucida Grande",
                                sans-serif;
 
-$font-family-base            : $font-family-default;
+// $font-family-base            : $font-family-default;
 $font-size-base              : 1rem;
 
 $font-weight-base            : 300;
@@ -257,8 +257,8 @@ $enable-hover-media-query       : false !default;
 // variables. Mostly focused on spacing.
 
 $spacer:                     1rem !default;
-$spacer-x:                   $spacer !default;
-$spacer-y:                   $spacer !default;
+$spacer-x                       : $spacer !default;
+$spacer-y                       : $spacer !default;
 $border-width                   : .0625rem !default;
 
 // Body
@@ -313,8 +313,8 @@ $container-max-widths: (
 //
 // Set the number of columns and specify the width of the gutters.
 
-$grid-columns:               12 !default;
-$grid-gutter-width:          1.875rem !default; // 30px
+$grid-columns                   : 12 !default;
+$grid-gutter-width              : 1.875rem !default; // 30px
 
 
 // Typography
@@ -340,10 +340,10 @@ $font-size-h4:               1.5rem !default;
 $font-size-h5:               1.25rem !default;
 $font-size-h6:               1rem !default;
 
-$display1-size:               3.5rem !default;
-$display2-size:               4.5rem !default;
-$display3-size:               5.5rem !default;
-$display4-size:               6rem !default;
+$display1-size                  : 3.5rem !default;
+$display2-size                  : 4.5rem !default;
+$display3-size                  : 5.5rem !default;
+$display4-size                  : 6rem !default;
 
 $display1-weight:             300 !default;
 $display2-weight:             300 !default;
@@ -352,25 +352,25 @@ $display4-weight:             300 !default;
 
 $line-height                    : 1.5 !default;
 
-$headings-margin-bottom:     ($spacer / 2) !default;
-$headings-font-family:       inherit !default;
-$headings-font-weight:       500 !default;
-$headings-line-height:       1.1 !default;
-$headings-color:             inherit !default;
+$headings-margin-bottom         : ($spacer / 2) !default;
+$headings-font-family           : inherit !default;
+$headings-font-weight           : 500 !default;
+$headings-line-height           : 1.1 !default;
+$headings-color                 : inherit !default;
 
-$lead-font-size:             1.25rem !default;
-$lead-font-weight:           300 !default;
+$lead-font-size                 : 1.25rem !default;
+$lead-font-weight               : 300 !default;
 
 $text-muted                     : $gray-light !default;
 
 $abbr-border-color              : $gray-light !default;
 
-$blockquote-small-color:      $gray-light !default;
-$blockquote-font-size:        ($font-size-base * 1.25) !default;
-$blockquote-border-color:     $gray-lighter !default;
+$blockquote-small-color         : $gray-light !default;
+$blockquote-font-size           : ($font-size-base * 1.25) !default;
+$blockquote-border-color        : $gray-lighter !default;
 
-$hr-border-color:             rgba(0,0,0,.1) !default;
-$hr-border-width:             $border-width !default;
+$hr-border-color                : rgba(0,0,0,.1) !default;
+$hr-border-width                : $border-width !default;
 
 
 // Components
@@ -634,7 +634,7 @@ $state-info-bg:                  #d9edf7 !default;
 $state-info-border:              darken($state-info-bg, 7%) !default;
 
 $state-warning-text:             #8a6d3b !default;
-$state-warning-bg:               #fcf8e3 !default;
+$state-warning-bg               : #fcf8e3 !default;
 $state-warning-border:           darken($state-warning-bg, 5%) !default;
 
 $state-danger-text:              #a94442 !default;
