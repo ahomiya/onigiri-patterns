@@ -929,6 +929,66 @@ a.bg-danger:hover {
   background-color: #c9302c;
 }
 
+.close {
+  color: #000;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  opacity: .2;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.close:focus,
+.close:hover {
+  color: #000;
+  cursor: pointer;
+  opacity: .5;
+  text-decoration: none;
+}
+
+button.close {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+.embed-responsive {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.embed-responsive .embed-responsive-item,
+.embed-responsive iframe,
+.embed-responsive embed,
+.embed-responsive object,
+.embed-responsive video {
+  border: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.embed-responsive-21by9 {
+  padding-bottom: 42.85714%;
+}
+
+.embed-responsive-16by9 {
+  padding-bottom: 56.25%;
+}
+
+.embed-responsive-4by3 {
+  padding-bottom: 75%;
+}
+
 .hidden {
   display: none !important;
   visibility: hidden;
@@ -3205,8 +3265,17 @@ mark,
   color: #2f6f9f;
 }
 
-code {
+code,
+pre {
   font-family: Menlo, Monaco,Consolas, "Courier New", monospace;
+}
+
+code {
+  background-color: #f7f7f9;
+  border-radius: .25rem;
+  color: #bd4147;
+  font-size: 90%;
+  padding: 0.2rem 0.4rem;
 }
 
 .container-dummy p {

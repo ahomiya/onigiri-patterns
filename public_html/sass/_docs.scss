@@ -61,6 +61,15 @@ border: 0;
 color: #2f6f9f;
 }
 
-code {
+code,
+pre {
   font-family: Menlo, Monaco,Consolas, "Courier New", monospace;
+}
+
+code {
+  background-color: $code-bg;
+  border-radius: .25rem;
+  color: $code-color;
+  font-size: 90%;
+  padding: .2rem .4rem;
 }

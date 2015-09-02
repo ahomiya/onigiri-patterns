@@ -81,7 +81,80 @@
 @include bg-variant('.bg-danger', $brand-danger);
 
 // -----------------------------------------------------------------------------
-// Old
+// Close
+
+.close {
+  color: $close-color;
+  float: right;
+  font: {
+    size: ($font-size-base * 1.5);
+    weight: $close-font-weight;
+  }
+  line-height: 1;
+  opacity: .2;
+  text-shadow: $close-text-shadow;
+
+  @include hover-focus {
+    color: $close-color;
+    cursor: pointer;
+    opacity: .5;
+    text-decoration: none;
+  }
+}
+
+// Additional properties for button version
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+button.close {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+// -----------------------------------------------------------------------------
+// Responsive embeds
+
+.embed-responsive {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  .embed-responsive-item,
+  iframe,
+  embed,
+  object,
+  video {
+    border: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+// Modifier class for 21:9 aspect ratio
+.embed-responsive-21by9 {
+  padding-bottom: percentage(9 / 21);
+}
+
+// Modifier class for 16:9 aspect ratio
+.embed-responsive-16by9 {
+  padding-bottom: percentage(9 / 16);
+}
+
+// Modifier class for 4:3 aspect ratio
+.embed-responsive-4by3 {
+  padding-bottom: percentage(3 / 4);
+}
+
+// -----------------------------------------------------------------------------
+// Visibility
 
 // Hide visually and from screen readers: h5bp.com/u
 .hidden {
