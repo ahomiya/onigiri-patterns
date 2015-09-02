@@ -2,8 +2,159 @@
 // A handful of helpful utility classes to add certain behaviors to elements.
 // -----------------------------------------------------------------------------
 
-// Clearfix: contain floats
+// Floats
+
 .clearfix { @include clearfix; }
+
+.center-block {
+  @include center-block;
+}
+
+.pull-right {
+  @include pull-right;
+}
+
+.pull-left {
+  @include pull-left;
+}
+
+// -----------------------------------------------------------------------------
+// Screenreaders
+
+.sr-only {
+  @include sr-only;
+}
+
+.sr-only-focusable {
+  @include sr-only-focusable;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.text-hide {
+  @include text-hide;
+}
+
+// -----------------------------------------------------------------------------
+// Text
+
+// Alignment
+.text-left     { text-align: left; }
+.text-right    { text-align: right; }
+.text-center   { text-align: center; }
+.text-justify  { text-align: justify; }
+.text-nowrap   { white-space: nowrap; }
+.text-truncate { @include text-truncate; }
+
+// Responsive alignment
+// Todo
+
+// Transformation
+.text-lowercase  { text-transform: lowercase; }
+.text-uppercase  { text-transform: uppercase; }
+.text-capitalize { text-transform: capitalize; }
+
+// Contextual colors
+.text-muted { color: $text-muted; }
+@include text-emphasis-variant('.text-primary', $brand-primary);
+@include text-emphasis-variant('.text-success', $brand-success);
+@include text-emphasis-variant('.text-info', $brand-info);
+@include text-emphasis-variant('.text-warning', $brand-warning);
+@include text-emphasis-variant('.text-danger', $brand-danger);
+
+// Contextual backgrounds
+.bg-inverse {
+  background-color: $gray-dark;
+  color: $gray-lighter;
+}
+.bg-faded { background-color: $gray-lightest; }
+@include bg-variant('.bg-primary', $brand-primary);
+@include bg-variant('.bg-success', $brand-success);
+@include bg-variant('.bg-info', $brand-info);
+@include bg-variant('.bg-warning', $brand-warning);
+@include bg-variant('.bg-danger', $brand-danger);
+
+// -----------------------------------------------------------------------------
+// Close
+
+.close {
+  color: $close-color;
+  float: right;
+  font: {
+    size: ($font-size-base * 1.5);
+    weight: $close-font-weight;
+  }
+  line-height: 1;
+  opacity: .2;
+  text-shadow: $close-text-shadow;
+
+  @include hover-focus {
+    color: $close-color;
+    cursor: pointer;
+    opacity: .5;
+    text-decoration: none;
+  }
+}
+
+// Additional properties for button version
+// iOS requires the button element instead of an anchor tag.
+// If you want the anchor version, it requires `href="#"`.
+button.close {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  -webkit-appearance: none;
+}
+
+// -----------------------------------------------------------------------------
+// Responsive embeds
+
+.embed-responsive {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  .embed-responsive-item,
+  iframe,
+  embed,
+  object,
+  video {
+    border: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+// Modifier class for 21:9 aspect ratio
+.embed-responsive-21by9 {
+  padding-bottom: percentage(9 / 21);
+}
+
+// Modifier class for 16:9 aspect ratio
+.embed-responsive-16by9 {
+  padding-bottom: percentage(9 / 16);
+}
+
+// Modifier class for 4:3 aspect ratio
+.embed-responsive-4by3 {
+  padding-bottom: percentage(3 / 4);
+}
+
+// -----------------------------------------------------------------------------
+// Visibility
 
 // Hide visually and from screen readers: h5bp.com/u
 .hidden {

@@ -1,6 +1,96 @@
 // Global mixins
 // -----------------------------------------------------------------------------
 
+// Pulls
+@mixin pull-left {
+  float: left !important;
+}
+
+@mixin pull-right {
+  float: right !important;
+}
+
+
+// Center-align a block level element
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// Text truncate
+// Requires inline-block or block for proper styling
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+// CSS image replacement
+@mixin text-hide {
+  background-color: transparent;
+  border: 0;
+  color: transparent;
+  font: "0/0" a;
+  text-shadow: none;
+}
+
+
+// Emphasis
+@mixin text-emphasis-variant($parent, $color) {
+  #{$parent} {
+    color: $color;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      color: darken($color, 10%);
+    }
+  }
+}
+
+
+// Contextual backgrounds
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    color: #fff;
+    background-color: $color;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+
+// Only display content to screen readers
+@mixin sr-only {
+  border: 0;
+  clip: rect(0,0,0,0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Use in conjunction with .sr-only to only display content when it's focused.
+@mixin sr-only-focusable {
+  &:active,
+  &:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+
+
 // Inline-block container
 @mixin inlineblock-container {
   font-size: 0;

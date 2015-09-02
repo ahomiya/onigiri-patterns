@@ -227,16 +227,16 @@ $link-bkg-active             : #fff;
 // Grayscale and brand colors for use across Bootstrap.
 
 $gray-dark                      : #373a3c !default;
-$gray:                      #55595c !default;
+$gray                           : #55595c !default;
 $gray-light                     : #818a91 !default;
-$gray-lighter:              #eceeef !default;
-$gray-lightest:             #f7f7f9 !default;
+$gray-lighter                   : #eceeef !default;
+$gray-lightest                  : #f7f7f9 !default;
 
-$brand-primary:             #0275d8 !default;
-$brand-success:             #5cb85c !default;
-$brand-info:                #5bc0de !default;
-$brand-warning:             #f0ad4e !default;
-$brand-danger:              #d9534f !default;
+$brand-primary                  : #0275d8 !default;
+$brand-success                  : #5cb85c !default;
+$brand-info                     : #5bc0de !default;
+$brand-warning                  : #f0ad4e !default;
+$brand-danger                   : #d9534f !default;
 
 
 // Options
@@ -809,15 +809,15 @@ $carousel-caption-color:                      #fff !default;
 
 // Close
 
-$close-font-weight:           bold !default;
-$close-color:                 #000 !default;
-$close-text-shadow:           0 1px 0 #fff !default;
+$close-font-weight              : bold !default;
+$close-color                    : #000 !default;
+$close-text-shadow              : 0 1px 0 #fff !default;
 
 
 // Code
 
-$code-color:                  #bd4147 !default;
-$code-bg:                     #f7f7f9 !default;
+$code-color                     : #bd4147 !default;
+$code-bg                        : #f7f7f9 !default;
 
 $kbd-color:                   #fff !default;
 $kbd-bg:                      #333 !default;
