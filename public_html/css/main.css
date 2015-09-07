@@ -526,7 +526,6 @@ html {
 
 html {
   font-size: 16px;
-  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -535,6 +534,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
