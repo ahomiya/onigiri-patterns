@@ -98,6 +98,7 @@ var components      = {
       componentPackage + '/jScrollPane/script/jquery.jscrollpane.js',
       componentPackage + '/select2/dist/js/select2.js',
       componentPackage + '/scroll-reveal/dist/scrollReveal.js',
+      componentPackage + '/jquery.scrollTo/jquery.scrollTo.js',
       componentPackage + '/animsition/dist/js/jquery.animsition.js'
     ]
   }
