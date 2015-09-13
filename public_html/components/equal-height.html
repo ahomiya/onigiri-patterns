@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Responsive Equal Height · Components · ahomiya.com</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- Utilities -->
+    <script src="../js/vendor/libraries.features.js"></script>
+  </head>
+  <body>
+    <h1>Responsive Equal Height</h1>
+    <ul>
+      <li>Prototype: jquery.matchHeight.js</li>
+      <li>Bower: matchheight</li>
+      <li><a href="http://brm.io/jquery-match-height/" target="_blank">Documentation</a></li>
+      <li><a href="http://brm.io/jquery-match-height-demo" target="_blank">Demo</a></li>
+      <li><a href="https://github.com/liabru/jquery-match-height" target="_blank">Repository</a></li>
+    </ul>
+    <hr>
+
+    <div class="equalheight">
+      <div class="equalheight-item background-001">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+      </div>
+
+      <div class="equalheight-item background-002">
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+      </div>
+
+      <div class="equalheight-item background-003">
+        <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+
+      <div class="equalheight-item background-004">
+        <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.</p>
+        <p><img src="../img/dummy/pix-001.jpg" alt=""></p>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
+    <script src="../js/vendor/libraries.core.js"></script>
+    <script src="../js/vendor/libraries.plugins.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/tracking.js"></script>
+    <script>
+      $(document).ready(function() {
+
+        /*
+         * Plugin        : jquery.matchHeight.js
+         * Documentation : http://brm.io/jquery-match-height/
+         * Demo          : http://brm.io/jquery-match-height-demo
+         * Repository    : https://github.com/liabru/jquery-match-height
+         */
+         $('.equalheight-item').matchHeight();
+
+      });
+    </script>
+  </body>
+</html>

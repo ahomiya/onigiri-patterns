@@ -1,0 +1,19 @@
+// Responsive Equal Height
+
+// Plugin        : jquery.matchHeight.js
+// Documentation : http://brm.io/jquery-match-height/
+// Demo          : http://brm.io/jquery-match-height-demo
+// Repository    : https://github.com/liabru/jquery-match-height
+// CSS prefix    : .equalheight-
+// -----------------------------------------------------------------------------
+
+.equalheight {
+  @include clearfix;
+}
+
+.equalheight-item {
+  border: #333 solid 1px;
+  float: left;
+  padding: 10px;
+  width: 25%;
+}

@@ -3,7 +3,7 @@
  * Project                            : Onigiri Patterns
  * CSS preprocessor                   : SASS
  * CSS authoring frameworks           : Toolkit
- * CSS resets / normalization         : Reset.css, Normalize.css
+ * CSS resets / normalization         : Normalize.css
  * Features detection library         : Modernizr
  * Front-end template                 : Onigiri
  * Design approach                    : Mobile first
@@ -3168,6 +3168,19 @@ mark,
   border-left-color: white;
 }
 
+.equalheight:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.equalheight-item {
+  border: #333 solid 1px;
+  float: left;
+  padding: 10px;
+  width: 25%;
+}
+
 .cd-top {
   cursor: pointer;
   display: inline-block;
@@ -3277,6 +3290,22 @@ code {
   color: #bd4147;
   font-size: 90%;
   padding: 0.2rem 0.4rem;
+}
+
+.background-001 {
+  background-color: yellowgreen;
+}
+
+.background-002 {
+  background-color: skyblue;
+}
+
+.background-003 {
+  background-color: pink;
+}
+
+.background-004 {
+  background-color: #ccc;
 }
 
 .container-dummy p {
