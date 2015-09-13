@@ -29,7 +29,8 @@
     "superfish": "1.7.6",
     "jQuery.mmenu": "5.4.0",
     "select2": "4.0.0",
-    "scroll-reveal": "2.3.2"
+    "scroll-reveal": "2.3.2",
+    "animsition": "3.6.0"
   },
   "resolutions": {
     "jquery": "2"
