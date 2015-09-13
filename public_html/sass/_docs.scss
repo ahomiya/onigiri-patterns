@@ -5,7 +5,7 @@
 }
 
 .onigiri-container {
-  padding: 0 50px;
+  padding: 25px 50px;
 }
 
 .onigiri-content {
@@ -18,8 +18,29 @@
   }
 }
 
+.onigiri-headset {
+  border-bottom: #f7f7f9 solid .2rem;
+  padding: 0 0 20px 0;
+}
+
 .onigiri-title {
-  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  > sup {
+    background-color: #eee;
+    border-radius: .25rem;
+    color: #0275d8;
+    font-size: 11px;
+    padding: 2px 3px;
+    position: relative;
+    top: -1.5rem;
+    &.false {
+      color: #999;
+      text-decoration: line-through;
+    }
+    + sup {
+      margin-left: -5px;
+    }
+  }
 }
 
 .onigiri-example {
@@ -74,6 +95,24 @@ code {
   padding: .2rem .4rem;
 }
 
+.onigiri-table {
+  th,
+  td {
+    padding: 2px 0;
+  }
+  th {
+    font-weight: normal;
+    width: 135px;
+  }
+  td {
+    > i {
+      font-style: normal;
+      margin-right: 15px;
+    }
+  }
+}
+
+// Background colors
 .background-001 { background-color: yellowgreen; }
 .background-002 { background-color: skyblue; }
 .background-003 { background-color: pink; }

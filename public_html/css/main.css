@@ -3221,7 +3221,7 @@ mark,
 }
 
 .onigiri-container {
-  padding: 0 50px;
+  padding: 25px 50px;
 }
 
 .onigiri-content > h2:not(:first-child) {
@@ -3232,8 +3232,32 @@ mark,
   margin-top: 1.5rem;
 }
 
+.onigiri-headset {
+  border-bottom: #f7f7f9 solid 0.2rem;
+  padding: 0 0 20px 0;
+}
+
 .onigiri-title {
-  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.onigiri-title > sup {
+  background-color: #eee;
+  border-radius: .25rem;
+  color: #0275d8;
+  font-size: 11px;
+  padding: 2px 3px;
+  position: relative;
+  top: -1.5rem;
+}
+
+.onigiri-title > sup.false {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.onigiri-title > sup + sup {
+  margin-left: -5px;
 }
 
 .onigiri-example {
@@ -3292,6 +3316,21 @@ code {
   padding: 0.2rem 0.4rem;
 }
 
+.onigiri-table th,
+.onigiri-table td {
+  padding: 2px 0;
+}
+
+.onigiri-table th {
+  font-weight: normal;
+  width: 135px;
+}
+
+.onigiri-table td > i {
+  font-style: normal;
+  margin-right: 15px;
+}
+
 .background-001 {
   background-color: yellowgreen;
 }
@@ -3312,6 +3351,11 @@ code {
   font-size: 18px;
   line-height: 30px;
   margin-bottom: 30px;
+}
+
+.responsive-image {
+  max-width: 100%;
+  width: 100%;
 }
 
 /*# sourceMappingURL=../sourcemaps/main.css.map */
