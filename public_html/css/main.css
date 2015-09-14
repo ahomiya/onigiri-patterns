@@ -3335,6 +3335,7 @@ mark,
 
 .onigiri-docs main {
   margin-top: 60px;
+  padding: 25px 0;
 }
 
 .onigiri-docs footer {
@@ -3352,21 +3353,17 @@ mark,
   text-decoration: none;
 }
 
-.onigiri-content {
-  padding: 25px 0;
-}
-
-.onigiri-content > h2:not(:first-child) {
+.onigiri-docs h2:not(:first-child) {
   margin-top: 3rem;
 }
 
-.onigiri-content > h3 {
+.onigiri-docs h3 {
   font-size: 1.25rem;
   margin-top: 1.5rem;
 }
 
-.onigiri-content h2 + ul,
-.onigiri-content h3 + ul {
+.onigiri-docs h2 + ul,
+.onigiri-docs h3 + ul {
   padding-top: 10px;
 }
 

@@ -45,6 +45,7 @@
 
   main {
     margin-top: 60px;
+    padding: 25px 0;
   }
 
   footer {
@@ -61,16 +62,12 @@
       }
     }
   }
-}
 
-.onigiri-content {
-  padding: 25px 0;
-
-  > h2:not(:first-child) {
+  h2:not(:first-child) {
     margin-top: 3rem;
   }
 
-  > h3 {
+  h3 {
     font-size: 1.25rem;
     margin-top: 1.5rem;
   }
