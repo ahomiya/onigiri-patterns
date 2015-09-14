@@ -147,7 +147,12 @@
          * Demo          : http://brm.io/jquery-match-height-demo
          * Repository    : https://github.com/liabru/jquery-match-height
          */
-         $('.equalheight-item').matchHeight();
+        $('.equalheight-item').matchHeight({
+          byRow    : true,
+          property : 'height',
+          target   : null,
+          remove   : false
+        });
 
       });
     </script>
