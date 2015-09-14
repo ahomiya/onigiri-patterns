@@ -5259,6 +5259,10 @@ mark,
   padding-bottom: 10px;
 }
 
+.patterns-demo {
+  padding-top: 50px;
+}
+
 .patterns-example {
   border: solid #f7f7f9;
   border-width: .2rem;
