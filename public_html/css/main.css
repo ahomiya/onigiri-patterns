@@ -3290,7 +3290,7 @@ mark,
   opacity: 1;
 }
 
-.onigiri-docs header {
+.patterns-docs header {
   background-color: #563d7c;
   color: #fff;
   font-size: 14px;
@@ -3302,81 +3302,81 @@ mark,
   z-index: 100;
 }
 
-.onigiri-docs header .nav-menu {
+.patterns-docs header .nav-menu {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.onigiri-docs header .nav-menu li {
+.patterns-docs header .nav-menu li {
   display: inline;
 }
 
-.onigiri-docs header .nav-menu li + li {
+.patterns-docs header .nav-menu li + li {
   margin-left: 1rem;
 }
 
-.onigiri-docs header .nav-menu a {
+.patterns-docs header .nav-menu a {
   color: #fff;
 }
 
-.onigiri-docs header .nav-menu a:hover {
+.patterns-docs header .nav-menu a:hover {
   color: #cdbfe3;
   text-decoration: none;
 }
 
-.onigiri-docs header .nav-menu a:visited {
+.patterns-docs header .nav-menu a:visited {
   text-decoration: none;
 }
 
-.onigiri-docs header .nav-meta {
+.patterns-docs header .nav-meta {
   text-align: right;
 }
 
-.onigiri-docs main {
+.patterns-docs main {
   margin-top: 60px;
   padding: 25px 0;
 }
 
-.onigiri-docs footer {
+.patterns-docs footer {
   background-color: #f7f7f7;
   color: #818a91;
   font-size: 85%;
   padding: 2rem 0 1rem 0;
 }
 
-.onigiri-docs footer small {
+.patterns-docs footer small {
   font-size: 100%;
 }
 
-.onigiri-docs footer a:hover {
+.patterns-docs footer a:hover {
   text-decoration: none;
 }
 
-.onigiri-docs h2:not(:first-child) {
+.patterns-docs h2:not(:first-child) {
   margin-top: 3rem;
 }
 
-.onigiri-docs h3 {
+.patterns-docs h3 {
   font-size: 1.25rem;
   margin-top: 1.5rem;
 }
 
-.onigiri-docs h2 + ul,
-.onigiri-docs h3 + ul {
+.patterns-docs h2 + ul,
+.patterns-docs h3 + ul {
   padding-top: 10px;
 }
 
-.onigiri-headset {
+.patterns-headset {
   border-bottom: #f7f7f9 solid 0.2rem;
   padding: 0 0 20px 0;
 }
 
-.onigiri-title {
+.patterns-title {
   margin-bottom: 1.5rem;
 }
 
-.onigiri-title > sup {
+.patterns-title > sup {
   background-color: #eee;
   border-radius: .25rem;
   color: #0275d8;
@@ -3386,20 +3386,20 @@ mark,
   top: -1.5rem;
 }
 
-.onigiri-title > sup.false {
+.patterns-title > sup.false {
   color: #999;
   text-decoration: line-through;
 }
 
-.onigiri-title > sup + sup {
+.patterns-title > sup + sup {
   margin-left: -5px;
 }
 
-.onigiri-description {
+.patterns-description {
   padding-bottom: 10px;
 }
 
-.onigiri-example {
+.patterns-example {
   border: solid #f7f7f9;
   border-width: .2rem;
   margin: 1rem 0 0 0;
@@ -3407,17 +3407,17 @@ mark,
   position: relative;
 }
 
-.onigiri-example:after {
+.patterns-example:after {
   content: "";
   display: table;
   clear: both;
 }
 
-.onigiri-example + .onigiri-highlight {
+.patterns-example + .patterns-highlight {
   margin-top: 0;
 }
 
-.onigiri-highlight {
+.patterns-highlight {
   margin: 1rem -1rem;
   background-color: #f7f7f9;
   padding: 1.5rem;
@@ -3425,7 +3425,7 @@ mark,
   margin-left: 0;
 }
 
-.onigiri-highlight pre {
+.patterns-highlight pre {
   padding: 0;
   margin-top: 0;
   margin-bottom: 0;
@@ -3433,7 +3433,7 @@ mark,
   border: 0;
 }
 
-.onigiri-highlight pre code {
+.patterns-highlight pre code {
   font-size: inherit;
   color: #373a3c;
 }
@@ -3455,22 +3455,22 @@ code {
   padding: 0.2rem 0.4rem;
 }
 
-.onigiri-table th,
-.onigiri-table td {
+.patterns-table th,
+.patterns-table td {
   padding: 2px 0;
 }
 
-.onigiri-table th {
+.patterns-table th {
   font-weight: normal;
   width: 135px;
 }
 
-.onigiri-table td > i {
+.patterns-table td > i {
   font-style: normal;
   margin-right: 15px;
 }
 
-.onigiri-remark {
+.patterns-remark {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;

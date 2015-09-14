@@ -1,6 +1,6 @@
 // Documentation
 
-.onigiri-docs {
+.patterns-docs {
   header {
     background-color: #563d7c;
     color: #fff;
@@ -80,12 +80,12 @@
   }
 }
 
-.onigiri-headset {
+.patterns-headset {
   border-bottom: #f7f7f9 solid .2rem;
   padding: 0 0 20px 0;
 }
 
-.onigiri-title {
+.patterns-title {
   margin-bottom: 1.5rem;
   > sup {
     background-color: #eee;
@@ -105,11 +105,11 @@
   }
 }
 
-.onigiri-description {
+.patterns-description {
   padding-bottom: 10px;
 }
 
-.onigiri-example {
+.patterns-example {
   @include clearfix;
   border: solid #f7f7f9;
   border-width: .2rem;
@@ -117,12 +117,12 @@
   padding: 1.5rem;
   position: relative;
 
-  & + .onigiri-highlight {
+  & + .patterns-highlight {
     margin-top: 0;
   }
 }
 
-.onigiri-highlight {
+.patterns-highlight {
 margin: 1rem -1rem;
 background-color: #f7f7f9;
 
@@ -161,7 +161,7 @@ code {
   padding: .2rem .4rem;
 }
 
-.onigiri-table {
+.patterns-table {
   th,
   td {
     padding: 2px 0;
@@ -178,7 +178,7 @@ code {
   }
 }
 
-.onigiri-remark {
+.patterns-remark {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;
