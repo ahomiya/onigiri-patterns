@@ -3321,7 +3321,7 @@ mark,
 }
 
 .onigiri-docs header .nav-menu a:hover {
-  color: #000;
+  color: #cdbfe3;
   text-decoration: none;
 }
 
@@ -3346,6 +3346,10 @@ mark,
 
 .onigiri-docs footer small {
   font-size: 100%;
+}
+
+.onigiri-docs footer a:hover {
+  text-decoration: none;
 }
 
 .onigiri-content {

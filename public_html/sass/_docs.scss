@@ -29,7 +29,7 @@
       a {
         color: #fff;
         &:hover {
-          color: #000;
+          color: #cdbfe3;
           text-decoration: none;
         }
         &:visited {
@@ -54,6 +54,12 @@
     padding: 2rem 0 1rem 0;
 
     small { font-size: 100%; }
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 }
 
