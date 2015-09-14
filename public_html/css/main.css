@@ -3290,8 +3290,66 @@ mark,
   opacity: 1;
 }
 
-.onigiri-container {
-  padding: 25px 50px;
+.onigiri-docs header {
+  background-color: #563d7c;
+  color: #fff;
+  font-size: 14px;
+  left: 0;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.onigiri-docs header .nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.onigiri-docs header .nav-menu li {
+  display: inline;
+}
+
+.onigiri-docs header .nav-menu li + li {
+  margin-left: 1rem;
+}
+
+.onigiri-docs header .nav-menu a {
+  color: #fff;
+}
+
+.onigiri-docs header .nav-menu a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.onigiri-docs header .nav-menu a:visited {
+  text-decoration: none;
+}
+
+.onigiri-docs header .nav-meta {
+  text-align: right;
+}
+
+.onigiri-docs main {
+  margin-top: 60px;
+}
+
+.onigiri-docs footer {
+  background-color: #f7f7f7;
+  color: #818a91;
+  font-size: 85%;
+  padding: 2rem 0 1rem 0;
+}
+
+.onigiri-docs footer small {
+  font-size: 100%;
+}
+
+.onigiri-content {
+  padding: 25px 0;
 }
 
 .onigiri-content > h2:not(:first-child) {
@@ -3299,7 +3357,13 @@ mark,
 }
 
 .onigiri-content > h3 {
+  font-size: 1.25rem;
   margin-top: 1.5rem;
+}
+
+.onigiri-content h2 + ul,
+.onigiri-content h3 + ul {
+  padding-top: 10px;
 }
 
 .onigiri-headset {
@@ -3403,6 +3467,16 @@ code {
 .onigiri-table td > i {
   font-style: normal;
   margin-right: 15px;
+}
+
+.onigiri-remark {
+  background-color: #eee;
+  border-radius: .25rem;
+  color: #999;
+  font-style: normal;
+  font-size: 12px;
+  margin-left: 5px;
+  padding: 1px 4px;
 }
 
 .background-001 {
