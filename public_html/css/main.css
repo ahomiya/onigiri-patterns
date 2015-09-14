@@ -3260,6 +3260,10 @@ mark,
   margin-left: -5px;
 }
 
+.onigiri-description {
+  padding-bottom: 10px;
+}
+
 .onigiri-example {
   border: solid #f7f7f9;
   border-width: .2rem;
