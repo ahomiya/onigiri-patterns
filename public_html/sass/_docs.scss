@@ -127,6 +127,19 @@
 .patterns-demo {
   padding-top: 50px;
 
+  h2 {
+    margin-bottom: 2.5rem;
+    // &::after {
+    //   background-color: #563d7c;
+    //   content: "";
+    //   display: block;
+    //   height: 3px;
+    //   position: relative;
+    //   top: 1px;
+    //   width: 88px;
+    // }
+  }
+
   h3 {
     font-size: 1.25rem;
     margin-bottom: 1rem;
