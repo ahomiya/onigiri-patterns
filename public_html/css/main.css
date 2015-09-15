@@ -5116,7 +5116,7 @@ mark,
   height: 100%;
 }
 
-.sticky-wrapper {
+.sticky-container {
   height: auto;
   margin: 0 auto -180px auto;
   min-height: 100%;
