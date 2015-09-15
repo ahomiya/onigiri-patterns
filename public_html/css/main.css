@@ -1036,6 +1036,11 @@ button.close {
   clear: both;
 }
 
+.row .row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .col-1,
 .col-2,
 .col-3,
@@ -1069,6 +1074,18 @@ button.close {
   .col-11,
   .col-12 {
     float: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-9 {
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-8 {
+    width: 66.66667%;
   }
 }
 
@@ -5109,6 +5126,16 @@ mark,
   float: left;
   padding: 10px;
   width: 25%;
+}
+
+.sticky-element {
+  background-color: #563d7c;
+  color: #fff;
+  display: block;
+  height: 100px;
+  max-width: 258px;
+  padding: 15px;
+  width: 100%;
 }
 
 .sticky-outer,
