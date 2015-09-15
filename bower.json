@@ -31,6 +31,7 @@
     "select2": "4.0.0",
     "scroll-reveal": "2.3.2",
     "jquery.scrollTo": "2.1.1",
+    "animsition": "3.6.0",
     "matchheight": "0.6.0"
   },
   "resolutions": {
