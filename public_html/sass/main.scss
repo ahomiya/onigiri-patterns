@@ -3,7 +3,7 @@
  * Project                            : Onigiri Patterns
  * CSS preprocessor                   : SASS
  * CSS authoring frameworks           : Toolkit
- * CSS resets / normalization         : Reset.css, Normalize.css
+ * CSS resets / normalization         : Normalize.css
  * Features detection library         : Modernizr
  * Front-end template                 : Onigiri
  * Design approach                    : Mobile first
@@ -136,6 +136,9 @@
 @import "components/slider";          // Slider
 @import "components/dropdown-menu";   // Dropdown menu
 @import "components/offcanvas-menu";  // Off-canvas menu
+@import "components/scroll-reveal";   // Scroll reveal
+@import "components/page-transitions";// Page transitions
+@import "components/equal-height";    // Responsive equal height
 
 // -----------------------------------------------------------------------------
 // Modules

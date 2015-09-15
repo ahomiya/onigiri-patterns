@@ -18166,3 +18166,1483 @@ S2.define('jquery.mousewheel',[
   // Return the Select2 instance for anyone who is importing it.
   return select2;
 }));
+
+
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require, exports, module);
+  } else {
+    root.scrollReveal = factory();
+  }
+}(this, function(require, exports, module) {
+
+/*
+                       _ _ _____                      _   _
+                      | | |  __ \                    | | (_)
+    ___  ___ _ __ ___ | | | |__) |_____   _____  __ _| |  _ ___
+   / __|/ __| '__/ _ \| | |  _  // _ \ \ / / _ \/ _` | | | / __|
+   \__ \ (__| | | (_) | | | | \ \  __/\ V /  __/ (_| | |_| \__ \
+   |___/\___|_|  \___/|_|_|_|  \_\___| \_/ \___|\__,_|_(_) |___/ v2.3.2
+                                                        _/ |
+                                                       |__/
+
+================================================================================
+
+   scrollReveal.js (c) 2015 Julian Lloyd ( @julianlloyd )
+   Licensed under MIT ( http://www.opensource.org/licenses/mit-license.php )
+
+==============================================================================*/
+
+window.scrollReveal = (function( window ){
+
+  'use strict';
+
+  var _requestAnimFrame;
+  var _extend;
+  var _handler;
+  var self;
+
+  function scrollReveal( config ){
+
+    if ( !( this instanceof scrollReveal ) ) {
+      return new scrollReveal( config );
+    }
+
+    self         = this;
+    self.elems   = {};
+    self.serial  = 1;
+    self.blocked = false;
+    self.config  = _extend( self.defaults, config );
+
+    if ( self.isMobile() && !self.config.mobile || !self.isSupported() ){
+      self.destroy();
+      return;
+    }
+
+    if ( self.config.viewport === window.document.documentElement ){
+
+      window.addEventListener( 'scroll', _handler, false );
+      window.addEventListener( 'resize', _handler, false );
+
+    } else {
+      self.config.viewport.addEventListener( 'scroll', _handler, false );
+    }
+
+    self.init( true );
+  }
+
+  scrollReveal.prototype = {
+
+    defaults: {
+
+      enter:    'bottom',
+      move:     '8px',
+      over:     '0.6s',
+      wait:     '0s',
+      easing:   'ease',
+
+      scale:    { direction: 'up', power: '5%' },
+      rotate:   { x: 0, y: 0, z: 0 },
+
+      opacity:  0,
+      mobile:   false,
+      reset:    false,
+
+      //        Expects a reference to a DOM node (the <html> node by default)
+      //        which is used as the context when checking element visibility.
+      viewport: window.document.documentElement,
+
+      //        'always' — delay every time an animation resets
+      //        'onload' - delay only for animations triggered by first load
+      //        'once'   — delay only the first time an animation reveals
+      delay:    'once',
+
+      //        vFactor changes when an element is considered in the viewport.
+      //        The default value of 0.60 means 60% of an element must be
+      //        visible for its reveal animation to trigger.
+      vFactor:  0.60,
+
+      complete: function( el ){} // Note: reset animations do not complete.
+    },
+
+    // Queries the DOM, builds scrollReveal elements and triggers animation.
+    // @param {boolean} flag — a hook for controlling delay on first load.
+    init: function( flag ){
+
+      var serial;
+      var elem;
+      var query;
+
+      query = Array.prototype.slice.call( self.config.viewport.querySelectorAll('[data-sr]') );
+      query.forEach(function( el ){
+
+        serial      = self.serial++;
+        elem        = self.elems[ serial ] = { domEl: el };
+        elem.config = self.configFactory( elem );
+        elem.styles = self.styleFactory( elem );
+        elem.seen   = false;
+
+        el.removeAttribute('data-sr');
+
+        el.setAttribute( 'style',
+            elem.styles.inline
+          + elem.styles.initial
+        );
+      })
+
+      self.scrolled = self.scrollY();
+      self.animate( flag );
+    },
+
+    // Applies and removes appropriate styles.
+    // @param {boolean} flag — a hook for controlling delay on first load.
+    animate: function( flag ){
+
+      var key;
+      var elem;
+      var visible;
+
+      // Begin element store digest.
+      for ( key in self.elems ){
+        if ( self.elems.hasOwnProperty( key ) ){
+
+          elem    = self.elems[ key ];
+          visible = self.isElemInViewport( elem );
+
+          if ( visible ){
+
+            if ( self.config.delay === 'always'
+            || ( self.config.delay === 'onload' && flag )
+            || ( self.config.delay === 'once'   && !elem.seen ) ){
+
+              // Use delay.
+              elem.domEl.setAttribute( 'style',
+                  elem.styles.inline
+                + elem.styles.target
+                + elem.styles.transition
+              );
+
+            } else {
+
+              // Don’t use delay.
+              elem.domEl.setAttribute( 'style',
+                  elem.styles.inline
+                + elem.styles.target
+                + elem.styles.reset
+              );
+            }
+
+            elem.seen = true;
+
+            if ( !elem.config.reset && !elem.animating ){
+              elem.animating = true;
+              complete( key );
+            }
+
+          } else if ( !visible && elem.config.reset ){
+
+            elem.domEl.setAttribute( 'style',
+                elem.styles.inline
+              + elem.styles.initial
+              + elem.styles.reset
+            );
+          }
+        }
+      }
+
+      // Digest complete, now un-block the event handler.
+      self.blocked = false;
+
+      // Cleans the DOM and removes completed elements from self.elems.
+      // @param {integer} key — self.elems property key.
+      function complete( key ){
+
+        var elem = self.elems[ key ];
+
+        setTimeout(function(){
+
+          elem.domEl.setAttribute( 'style', elem.styles.inline );
+          elem.config.complete( elem.domEl );
+          delete self.elems[ key ];
+
+        }, elem.styles.duration );
+      }
+    },
+
+    // Parses an elements data-sr attribute, and returns a configuration object.
+    // @param {object} elem — An object from self.elems.
+    // @return {object}
+    configFactory: function( elem ){
+
+      var parsed = {};
+      var config = {};
+      var words  = elem.domEl.getAttribute('data-sr').split( /[, ]+/ );
+
+      words.forEach(function( keyword, i ){
+        switch ( keyword ){
+
+          case 'enter':
+
+            parsed.enter = words[ i + 1 ];
+            break;
+
+          case 'wait':
+
+            parsed.wait = words[ i + 1 ];
+            break;
+
+          case 'move':
+
+            parsed.move = words[ i + 1 ];
+            break;
+
+          case 'ease':
+
+            parsed.move = words[ i + 1 ];
+            parsed.ease = 'ease';
+            break;
+
+          case 'ease-in':
+
+            if ( words[ i + 1 ] == 'up' || words[ i + 1 ] == 'down' ){
+
+              parsed.scale.direction = words[ i + 1 ];
+              parsed.scale.power     = words[ i + 2 ];
+              parsed.easing          = 'ease-in';
+              break;
+            }
+
+            parsed.move   = words[ i + 1 ];
+            parsed.easing = 'ease-in';
+            break;
+
+          case 'ease-in-out':
+
+            if ( words[ i + 1 ] == 'up' || words[ i + 1 ] == 'down' ){
+
+              parsed.scale.direction = words[ i + 1 ];
+              parsed.scale.power     = words[ i + 2 ];
+              parsed.easing          = 'ease-in-out';
+              break;
+            }
+
+            parsed.move   = words[ i + 1 ];
+            parsed.easing = 'ease-in-out';
+            break;
+
+          case 'ease-out':
+
+            if ( words[ i + 1 ] == 'up' || words[ i + 1 ] == 'down' ){
+
+              parsed.scale.direction = words[ i + 1 ];
+              parsed.scale.power     = words[ i + 2 ];
+              parsed.easing          = 'ease-out';
+              break;
+            }
+
+            parsed.move   = words[ i + 1 ];
+            parsed.easing = 'ease-out';
+            break;
+
+          case 'hustle':
+
+            if ( words[ i + 1 ] == 'up' || words[ i + 1 ] == 'down' ){
+
+              parsed.scale.direction = words[ i + 1 ];
+              parsed.scale.power     = words[ i + 2 ];
+              parsed.easing          = 'cubic-bezier( 0.6, 0.2, 0.1, 1 )';
+              break;
+            }
+
+            parsed.move   = words[ i + 1 ];
+            parsed.easing = 'cubic-bezier( 0.6, 0.2, 0.1, 1 )';
+            break;
+
+          case 'over':
+
+            parsed.over = words[ i + 1 ];
+            break;
+
+          case 'flip':
+          case 'pitch':
+            parsed.rotate   = parsed.rotate || {};
+            parsed.rotate.x = words[ i + 1 ];
+            break;
+
+          case 'spin':
+          case 'yaw':
+            parsed.rotate   = parsed.rotate || {};
+            parsed.rotate.y = words[ i + 1 ];
+            break;
+
+          case 'roll':
+            parsed.rotate   = parsed.rotate || {};
+            parsed.rotate.z = words[ i + 1 ];
+            break;
+
+          case 'reset':
+
+            if ( words[ i - 1 ] == 'no' ){
+              parsed.reset = false;
+            } else {
+              parsed.reset = true;
+            }
+            break;
+
+          case 'scale':
+
+            parsed.scale = {};
+
+            if ( words[ i + 1 ] == 'up' || words[ i + 1 ] == 'down' ){
+
+              parsed.scale.direction = words[ i + 1 ];
+              parsed.scale.power     = words[ i + 2 ];
+              break;
+            }
+
+            parsed.scale.power = words[ i + 1 ];
+            break;
+
+          case 'vFactor':
+          case 'vF':
+            parsed.vFactor = words[ i + 1 ];
+            break;
+
+          case 'opacity':
+            parsed.opacity = words[ i + 1 ];
+            break;
+
+          default:
+            return;
+        }
+      });
+
+      // Build default config object, then apply any keywords parsed from the
+      // data-sr attribute.
+      config = _extend( config, self.config );
+      config = _extend( config, parsed );
+
+      if ( config.enter === 'top' || config.enter === 'bottom' ){
+        config.axis = 'Y';
+      } else if ( config.enter === 'left' || config.enter === 'right' ){
+        config.axis = 'X';
+      }
+
+      // Let’s make sure our our pixel distances are negative for top and left.
+      // e.g. "enter top and move 25px" starts at 'top: -25px' in CSS.
+      if ( config.enter === 'top' || config.enter === 'left' ){
+        config.move = '-' + config.move;
+      }
+
+      return config;
+    },
+
+    // Generates styles based on an elements configuration property.
+    // @param {object} elem — An object from self.elems.
+    // @return {object}
+    styleFactory: function( elem ){
+
+      var inline;
+      var initial;
+      var reset;
+      var target;
+      var transition;
+
+      var cfg      = elem.config;
+      var duration = ( parseFloat( cfg.over ) + parseFloat( cfg.wait ) ) * 1000;
+
+      // Want to disable delay on mobile devices? Uncomment the line below.
+      // if ( self.isMobile() && self.config.mobile ) cfg.wait = 0;
+
+      if ( elem.domEl.getAttribute('style') ){
+        inline = elem.domEl.getAttribute('style') + '; visibility: visible; ';
+      } else {
+        inline = 'visibility: visible; ';
+      }
+
+      transition = '-webkit-transition: -webkit-transform ' + cfg.over + ' ' + cfg.easing + ' ' + cfg.wait + ', opacity ' + cfg.over + ' ' + cfg.easing + ' ' + cfg.wait + '; ' +
+                           'transition: transform '         + cfg.over + ' ' + cfg.easing + ' ' + cfg.wait + ', opacity ' + cfg.over + ' ' + cfg.easing + ' ' + cfg.wait + '; ' +
+                  '-webkit-perspective: 1000;' +
+          '-webkit-backface-visibility: hidden;';
+
+      reset      = '-webkit-transition: -webkit-transform ' + cfg.over + ' ' + cfg.easing + ' 0s, opacity ' + cfg.over + ' ' + cfg.easing + ' 0s; ' +
+                           'transition: transform '         + cfg.over + ' ' + cfg.easing + ' 0s, opacity ' + cfg.over + ' ' + cfg.easing + ' 0s; ' +
+                  '-webkit-perspective: 1000; ' +
+          '-webkit-backface-visibility: hidden; ';
+
+      initial = 'transform:';
+      target  = 'transform:';
+      build();
+
+      // Build again for webkit…
+      initial += '-webkit-transform:';
+      target  += '-webkit-transform:';
+      build();
+
+      return {
+        transition: transition,
+        initial:    initial,
+        target:     target,
+        reset:      reset,
+        inline:     inline,
+        duration:   duration
+      };
+
+      // Constructs initial and target styles.
+      function build(){
+
+        if ( parseInt( cfg.move ) !== 0 ){
+          initial += ' translate' + cfg.axis + '(' + cfg.move + ')';
+          target  += ' translate' + cfg.axis + '(0)';
+        }
+
+        if ( parseInt( cfg.scale.power ) !== 0 ){
+
+          if ( cfg.scale.direction === 'up' ){
+            cfg.scale.value = 1 - ( parseFloat( cfg.scale.power ) * 0.01 );
+          } else if ( cfg.scale.direction === 'down' ){
+            cfg.scale.value = 1 + ( parseFloat( cfg.scale.power ) * 0.01 );
+          }
+
+          initial += ' scale(' + cfg.scale.value + ')';
+          target  += ' scale(1)';
+        }
+
+        if ( cfg.rotate.x ){
+          initial += ' rotateX(' + cfg.rotate.x + ')';
+          target  += ' rotateX(0)';
+        }
+
+        if ( cfg.rotate.y ){
+          initial += ' rotateY(' + cfg.rotate.y + ')';
+          target  += ' rotateY(0)';
+        }
+
+        if ( cfg.rotate.z ){
+          initial += ' rotateZ(' + cfg.rotate.z + ')';
+          target  += ' rotateZ(0)';
+        }
+
+        initial += '; opacity: ' + cfg.opacity + '; ';
+        target  += '; opacity: 1; ';
+      }
+    },
+
+    getViewportH: function(){
+
+      var client = self.config.viewport['clientHeight'];
+      var inner  = window['innerHeight'];
+
+      if ( self.config.viewport === window.document.documentElement ){
+        return ( client < inner ) ? inner : client;
+      }
+
+      return client;
+    },
+
+    scrollY: function(){
+      if ( self.config.viewport === window.document.documentElement ){
+        return window.pageYOffset;
+      } else {
+        return self.config.viewport.scrollTop + self.config.viewport.offsetTop;
+      }
+    },
+
+    getOffset: function( el ){
+
+      var offsetTop  = 0;
+      var offsetLeft = 0;
+
+      do {
+        if ( !isNaN( el.offsetTop ) ){
+          offsetTop  += el.offsetTop;
+        }
+        if ( !isNaN( el.offsetLeft ) ){
+          offsetLeft += el.offsetLeft;
+        }
+      } while ( el = el.offsetParent );
+
+      return {
+        top: offsetTop,
+        left: offsetLeft
+      };
+    },
+
+    isElemInViewport: function( elem ){
+
+      var elHeight = elem.domEl.offsetHeight;
+      var elTop    = self.getOffset( elem.domEl ).top;
+      var elBottom = elTop + elHeight;
+      var vFactor  = elem.config.vFactor || 0;
+
+      return ( confirmBounds() || isPositionFixed() );
+
+      function confirmBounds(){
+
+        var top        = elTop + elHeight * vFactor;
+        var bottom     = elBottom - elHeight * vFactor;
+        var viewBottom = self.scrolled + self.getViewportH();
+        var viewTop    = self.scrolled;
+
+        return ( top < viewBottom ) && ( bottom > viewTop );
+      }
+
+      function isPositionFixed(){
+
+        var el    = elem.domEl;
+        var style = el.currentStyle || window.getComputedStyle( el, null );
+
+        return style.position === 'fixed';
+      }
+    },
+
+    isMobile: function(){
+
+      var agent = navigator.userAgent || navigator.vendor || window.opera;
+
+      return (/(ipad|playbook|silk|android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test( agent )||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test( agent.substr( 0, 4 ))) ? true : false;
+    },
+
+    isSupported: function(){
+
+      var sensor    = document.createElement('sensor');
+      var cssPrefix = 'Webkit,Moz,O,'.split(',');
+      var tests     = ( 'transition ' + cssPrefix.join('transition,') ).split(',');
+
+      for ( var i = 0; i < tests.length; i++ ){
+        if ( !sensor.style[tests[i]] === '' ){
+          return false;
+        }
+      }
+
+      return true;
+    },
+
+    destroy: function(){
+
+      var node = self.config.viewport;
+      var query = Array.prototype.slice.call( node.querySelectorAll('[data-sr]') );
+
+      query.forEach(function( el ){
+        el.removeAttribute('data-sr');
+      });
+    }
+  } // End of the scrollReveal prototype ======================================|
+
+  _handler = function( e ){
+
+    if ( !self.blocked ){
+
+      self.blocked  = true;
+      self.scrolled = self.scrollY();
+
+      _requestAnimFrame(function(){
+        self.animate();
+      });
+    }
+  }
+
+  _extend = function( target, src ){
+
+    for ( var prop in src ){
+      if ( src.hasOwnProperty( prop ) ){
+        target[ prop ] = src[ prop ];
+      }
+    }
+
+    return target;
+  }
+
+  // RequestAnimationFrame polyfill.
+  _requestAnimFrame = (function(){
+
+    return window.requestAnimationFrame        ||
+           window.webkitRequestAnimationFrame  ||
+           window.mozRequestAnimationFrame     ||
+
+          function( callback ){
+            window.setTimeout( callback, 1000 / 60 );
+          };
+  }());
+
+  return scrollReveal;
+
+})( window );
+
+return scrollReveal;
+
+}));
+
+/*!
+ * jQuery.scrollTo
+ * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Licensed under MIT
+ * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
+ * @projectDescription Lightweight, cross-browser and highly customizable animated scrolling with jQuery
+ * @author Ariel Flesler
+ * @version 2.1.1
+ */
+;(function(factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['jquery'], factory);
+	} else if (typeof module !== 'undefined' && module.exports) {
+		// CommonJS
+		module.exports = factory(require('jquery'));
+	} else {
+		// Global
+		factory(jQuery);
+	}
+})(function($) {
+	'use strict';
+
+	var $scrollTo = $.scrollTo = function(target, duration, settings) {
+		return $(window).scrollTo(target, duration, settings);
+	};
+
+	$scrollTo.defaults = {
+		axis:'xy',
+		duration: 0,
+		limit:true
+	};
+
+	function isWin(elem) {
+		return !elem.nodeName ||
+			$.inArray(elem.nodeName.toLowerCase(), ['iframe','#document','html','body']) !== -1;
+	}		
+
+	$.fn.scrollTo = function(target, duration, settings) {
+		if (typeof duration === 'object') {
+			settings = duration;
+			duration = 0;
+		}
+		if (typeof settings === 'function') {
+			settings = { onAfter:settings };
+		}
+		if (target === 'max') {
+			target = 9e9;
+		}
+
+		settings = $.extend({}, $scrollTo.defaults, settings);
+		// Speed is still recognized for backwards compatibility
+		duration = duration || settings.duration;
+		// Make sure the settings are given right
+		var queue = settings.queue && settings.axis.length > 1;
+		if (queue) {
+			// Let's keep the overall duration
+			duration /= 2;
+		}
+		settings.offset = both(settings.offset);
+		settings.over = both(settings.over);
+
+		return this.each(function() {
+			// Null target yields nothing, just like jQuery does
+			if (target === null) return;
+
+			var win = isWin(this),
+				elem = win ? this.contentWindow || window : this,
+				$elem = $(elem),
+				targ = target, 
+				attr = {},
+				toff;
+
+			switch (typeof targ) {
+				// A number will pass the regex
+				case 'number':
+				case 'string':
+					if (/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ)) {
+						targ = both(targ);
+						// We are done
+						break;
+					}
+					// Relative/Absolute selector
+					targ = win ? $(targ) : $(targ, elem);
+					if (!targ.length) return;
+					/* falls through */
+				case 'object':
+					// DOMElement / jQuery
+					if (targ.is || targ.style) {
+						// Get the real position of the target
+						toff = (targ = $(targ)).offset();
+					}
+			}
+
+			var offset = $.isFunction(settings.offset) && settings.offset(elem, targ) || settings.offset;
+
+			$.each(settings.axis.split(''), function(i, axis) {
+				var Pos	= axis === 'x' ? 'Left' : 'Top',
+					pos = Pos.toLowerCase(),
+					key = 'scroll' + Pos,
+					prev = $elem[key](),
+					max = $scrollTo.max(elem, axis);
+
+				if (toff) {// jQuery / DOMElement
+					attr[key] = toff[pos] + (win ? 0 : prev - $elem.offset()[pos]);
+
+					// If it's a dom element, reduce the margin
+					if (settings.margin) {
+						attr[key] -= parseInt(targ.css('margin'+Pos), 10) || 0;
+						attr[key] -= parseInt(targ.css('border'+Pos+'Width'), 10) || 0;
+					}
+
+					attr[key] += offset[pos] || 0;
+
+					if (settings.over[pos]) {
+						// Scroll to a fraction of its width/height
+						attr[key] += targ[axis === 'x'?'width':'height']() * settings.over[pos];
+					}
+				} else {
+					var val = targ[pos];
+					// Handle percentage values
+					attr[key] = val.slice && val.slice(-1) === '%' ?
+						parseFloat(val) / 100 * max
+						: val;
+				}
+
+				// Number or 'number'
+				if (settings.limit && /^\d+$/.test(attr[key])) {
+					// Check the limits
+					attr[key] = attr[key] <= 0 ? 0 : Math.min(attr[key], max);
+				}
+
+				// Don't waste time animating, if there's no need.
+				if (!i && settings.axis.length > 1) {
+					if (prev === attr[key]) {
+						// No animation needed
+						attr = {};
+					} else if (queue) {
+						// Intermediate animation
+						animate(settings.onAfterFirst);
+						// Don't animate this axis again in the next iteration.
+						attr = {};
+					}
+				}
+			});
+
+			animate(settings.onAfter);
+
+			function animate(callback) {
+				var opts = $.extend({}, settings, {
+					// The queue setting conflicts with animate()
+					// Force it to always be true
+					queue: true,
+					duration: duration,
+					complete: callback && function() {
+						callback.call(elem, targ, settings);
+					}
+				});
+				$elem.animate(attr, opts);
+			}
+		});
+	};
+
+	// Max scrolling position, works on quirks mode
+	// It only fails (not too badly) on IE, quirks mode.
+	$scrollTo.max = function(elem, axis) {
+		var Dim = axis === 'x' ? 'Width' : 'Height',
+			scroll = 'scroll'+Dim;
+
+		if (!isWin(elem))
+			return elem[scroll] - $(elem)[Dim.toLowerCase()]();
+
+		var size = 'client' + Dim,
+			doc = elem.ownerDocument || elem.document,
+			html = doc.documentElement,
+			body = doc.body;
+
+		return Math.max(html[scroll], body[scroll]) - Math.min(html[size], body[size]);
+	};
+
+	function both(val) {
+		return $.isFunction(val) || $.isPlainObject(val) ? val : { top:val, left:val };
+	}
+
+	// Add special hooks so that window scroll properties can be animated
+	$.Tween.propHooks.scrollLeft = 
+	$.Tween.propHooks.scrollTop = {
+		get: function(t) {
+			return $(t.elem)[t.prop]();
+		},
+		set: function(t) {
+			var curr = this.get(t);
+			// If interrupt is true and user scrolled, stop animating
+			if (t.options.interrupt && t._last && t._last !== curr) {
+				return $(t.elem).stop();
+			}
+			var next = Math.round(t.now);
+			// Don't waste CPU
+			// Browsers don't render floating point scroll
+			if (curr !== next) {
+				$(t.elem)[t.prop](next);
+				t._last = this.get(t);
+			}
+		}
+	};
+
+	// AMD requirement
+	return $scrollTo;
+});
+
+/*!
+ * animsition v3.6.0
+ * A simple and easy jQuery plugin for CSS animated page transitions.
+ * http://blivesta.github.io/animsition
+ * License : MIT
+ * Author : blivesta (http://blivesta.com/)
+ */
+;(function (factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
+  } else {
+    factory(jQuery);
+  }
+}(function ($) {
+  'use strict';
+  var namespace = 'animsition';
+  var methods = {
+    init: function(options){
+      options = $.extend({
+        inClass               :   'fade-in',
+        outClass              :   'fade-out',
+        inDuration            :    1500,
+        outDuration           :    800,
+        linkElement           :   '.animsition-link',
+        // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+        loading               :    true,
+        loadingParentElement  :   'body', //animsition wrapper element
+        loadingClass          :   'animsition-loading',
+        unSupportCss          : [ 'animation-duration',
+                                  '-webkit-animation-duration',
+                                  '-o-animation-duration'],
+        overlay               :   false,
+        overlayClass          :   'animsition-overlay-slide',
+        overlayParentElement  :   'body'
+      }, options);
+
+      // Remove the "Animsition" in a browser
+      // that does not support the "animaition-duration".
+      var support = methods.supportCheck.call(this, options);
+
+      if(!support && options.unSupportCss.length > 0){
+        if(!support || !this.length){
+          // If do not have a console object to object window
+          if (!('console' in window)) {
+            window.console = {};
+            window.console.log = function(str){ return str; };
+          }
+          if(!this.length){
+            console.log('Animsition: Element does not exist on page.');
+          }
+          if(!support){
+            console.log('Animsition: Does not support this browser.');
+          }
+          return methods.destroy.call(this);
+        }
+      }
+
+      var overlayMode = methods.optionCheck.call(this, options);
+      if(overlayMode) {
+        methods.addOverlay.call(this, options);
+      }
+
+      if(options.loading) {
+        methods.addLoading.call(this, options);
+      }
+
+      return this.each(function(){
+        var _this = this;
+        var $this = $(this);
+        var $window = $(window);
+        var data = $this.data(namespace);
+
+        if (!data) {
+          options = $.extend({}, options);
+
+          $this.data(namespace, {
+            options: options
+          });
+
+          $window.on('load.' + namespace + ' pageshow.' + namespace, function() {
+            methods.pageIn.call( _this );
+          });
+
+          // Firefox back button issue #4
+          $window.on('unload.' + namespace, function() { });
+
+          $(options.linkElement).on('click.' + namespace, function(event) {
+            event.preventDefault();
+            var $self = $(this);
+            var url = $self.attr('href');
+
+            // middle mouse button issue #24
+            // if(middle mouse button || command key || shift key || win control key)
+            if (event.which === 2 || event.metaKey || event.shiftKey || navigator.platform.toUpperCase().indexOf('WIN') !== -1 && event.ctrlKey) {
+              window.open(url, '_blank');
+            } else {
+              methods.pageOut.call(_this,$self,url);
+            }
+
+          });
+        }
+      }); // end each
+    },
+
+    addOverlay: function(options){
+      $(options.overlayParentElement).prepend('<div class="'+options.overlayClass+'"></div>');
+    },
+
+    addLoading: function(options){
+      $(options.loadingParentElement).append('<div class="'+options.loadingClass+'"></div>');
+    },
+
+    removeLoading: function(){
+      var $this     = $(this);
+      var options   = $this.data(namespace).options;
+      var $loading  = $(options.loadingParentElement).children('.' + options.loadingClass);
+      $loading.fadeOut().remove();
+    },
+
+    supportCheck: function(options){
+      var $this = $(this);
+      var props = options.unSupportCss;
+      var propsNum = props.length;
+      var support  = false;
+
+      if (propsNum === 0) {
+        support = true;
+      }
+      for (var i = 0; i < propsNum; i++) {
+        if (typeof $this.css(props[i]) === 'string') {
+          support = true;
+          break;
+        }
+      }
+      return support;
+    },
+
+    optionCheck: function(options){
+      var $this = $(this);
+      var overlayMode;
+      if(options.overlay || $this.data('animsition-overlay')){
+        overlayMode = true;
+      } else {
+        overlayMode = false;
+      }
+      return overlayMode;
+    },
+
+    animationCheck : function(data, stateClass, stateIn){
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var dataType = typeof data;
+      var dataDuration = !stateClass && dataType === 'number';
+      var dataClass = stateClass && dataType === 'string' && data.length > 0;
+
+      if(dataDuration || dataClass){
+        data = data;
+      } else if(stateClass && stateIn) {
+        data = options.inClass;
+      } else if(!stateClass && stateIn) {
+        data = options.inDuration;
+      } else if(stateClass && !stateIn) {
+        data = options.outClass;
+      } else if(!stateClass && !stateIn) {
+        data = options.outDuration;
+      }
+      return data;
+    },
+
+    pageIn: function(){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var thisInDuration = $this.data('animsition-in-duration');
+      var thisInClass = $this.data('animsition-in');
+      var inDuration = methods.animationCheck.call(_this,thisInDuration,false,true);
+      var inClass = methods.animationCheck.call(_this,thisInClass,true,true);
+      var overlayMode = methods.optionCheck.call(_this, options);
+
+      if(options.loading) {
+        methods.removeLoading.call(_this);
+      }
+
+      if(overlayMode) {
+        methods.pageInOverlay.call(_this,inClass,inDuration);
+      } else {
+        methods.pageInBasic.call(_this,inClass,inDuration);
+      }
+    },
+
+    pageInBasic: function(inClass,inDuration){
+      var $this = $(this);
+
+      $this
+        .trigger('animsition.start')
+        .css({ 'animation-duration' : (inDuration / 1000) + 's' })
+        .addClass(inClass)
+        .animateCallback(function(){
+          $this
+            .removeClass(inClass)
+            .css({ 'opacity' : 1 })
+            .trigger('animsition.end');
+        });
+    },
+
+    pageInOverlay: function(inClass,inDuration){
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+
+      $this
+        .trigger('animsition.start')
+        .css({ 'opacity' : 1 });
+
+      $(options.overlayParentElement)
+        .children('.' + options.overlayClass)
+        .css({ 'animation-duration' : (inDuration / 1000) + 's' })
+        .addClass(inClass)
+        .animateCallback(function(){
+          $this.trigger('animsition.end');
+        });
+    },
+
+    pageOut: function($self,url){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var selfOutClass = $self.data('animsition-out');
+      var thisOutClass = $this.data('animsition-out');
+      var selfOutDuration = $self.data('animsition-out-duration');
+      var thisOutDuration = $this.data('animsition-out-duration');
+      var isOutClass = selfOutClass ? selfOutClass : thisOutClass;
+      var isOutDuration = selfOutDuration ? selfOutDuration : thisOutDuration;
+      var outClass = methods.animationCheck.call(_this,isOutClass,true,false);
+      var outDuration = methods.animationCheck.call(_this, isOutDuration,false,false);
+      var overlayMode = methods.optionCheck.call(_this, options);
+
+      if(overlayMode) {
+        methods.pageOutOverlay.call(_this,outClass,outDuration,url);
+      } else {
+        methods.pageOutBasic.call(_this,outClass,outDuration,url);
+      }
+    },
+
+    pageOutBasic: function(outClass,outDuration,url){
+      var $this = $(this);
+
+      $this
+        .css({ 'animation-duration' : (outDuration / 1000) + 's' })
+        .addClass(outClass)
+        .animateCallback(function(){
+          location.href = url;
+        });
+    },
+
+    pageOutOverlay: function(outClass,outDuration,url){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var thisInClass = $this.data('animsition-in');
+      var inClass = methods.animationCheck.call(_this,thisInClass,true,true);
+
+      $(options.overlayParentElement).children('.' + options.overlayClass)
+        .css({ 'animation-duration' : (outDuration / 1000) + 's' })
+        .removeClass(inClass)
+        .addClass(outClass)
+        .animateCallback(function(){
+          location.href = url;
+        });
+    },
+
+    destroy: function(){
+      return this.each(function(){
+        var $this = $(this);
+        $(window).unbind('.'+namespace);
+        $this
+          .css({'opacity':1})
+          .removeData(namespace);
+      });
+    }
+
+  };
+
+  $.fn.animateCallback = function(callback){
+    var end = 'animationend webkitAnimationEnd mozAnimationEnd oAnimationEnd MSAnimationEnd';
+    return this.each(function() {
+      $(this).bind(end, function(){
+        $(this).unbind(end);
+        return callback.call(this);
+      });
+    });
+  };
+
+  $.fn.animsition = function(method){
+    if ( methods[method] ) {
+      return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof method === 'object' || ! method ) {
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  method + ' does not exist on jQuery.'+namespace);
+    }
+  };
+
+}));
+
+/**
+* jquery.matchHeight.js master
+* http://brm.io/jquery-match-height/
+* License: MIT
+*/
+
+;(function($) {
+    /*
+    *  internal
+    */
+
+    var _previousResizeWidth = -1,
+        _updateTimeout = -1;
+
+    /*
+    *  _parse
+    *  value parse utility function
+    */
+
+    var _parse = function(value) {
+        // parse value and convert NaN to 0
+        return parseFloat(value) || 0;
+    };
+
+    /*
+    *  _rows
+    *  utility function returns array of jQuery selections representing each row
+    *  (as displayed after float wrapping applied by browser)
+    */
+
+    var _rows = function(elements) {
+        var tolerance = 1,
+            $elements = $(elements),
+            lastTop = null,
+            rows = [];
+
+        // group elements by their top position
+        $elements.each(function(){
+            var $that = $(this),
+                top = $that.offset().top - _parse($that.css('margin-top')),
+                lastRow = rows.length > 0 ? rows[rows.length - 1] : null;
+
+            if (lastRow === null) {
+                // first item on the row, so just push it
+                rows.push($that);
+            } else {
+                // if the row top is the same, add to the row group
+                if (Math.floor(Math.abs(lastTop - top)) <= tolerance) {
+                    rows[rows.length - 1] = lastRow.add($that);
+                } else {
+                    // otherwise start a new row group
+                    rows.push($that);
+                }
+            }
+
+            // keep track of the last row top
+            lastTop = top;
+        });
+
+        return rows;
+    };
+
+    /*
+    *  _parseOptions
+    *  handle plugin options
+    */
+
+    var _parseOptions = function(options) {
+        var opts = {
+            byRow: true,
+            property: 'height',
+            target: null,
+            remove: false
+        };
+
+        if (typeof options === 'object') {
+            return $.extend(opts, options);
+        }
+
+        if (typeof options === 'boolean') {
+            opts.byRow = options;
+        } else if (options === 'remove') {
+            opts.remove = true;
+        }
+
+        return opts;
+    };
+
+    /*
+    *  matchHeight
+    *  plugin definition
+    */
+
+    var matchHeight = $.fn.matchHeight = function(options) {
+        var opts = _parseOptions(options);
+
+        // handle remove
+        if (opts.remove) {
+            var that = this;
+
+            // remove fixed height from all selected elements
+            this.css(opts.property, '');
+
+            // remove selected elements from all groups
+            $.each(matchHeight._groups, function(key, group) {
+                group.elements = group.elements.not(that);
+            });
+
+            // TODO: cleanup empty groups
+
+            return this;
+        }
+
+        if (this.length <= 1 && !opts.target) {
+            return this;
+        }
+
+        // keep track of this group so we can re-apply later on load and resize events
+        matchHeight._groups.push({
+            elements: this,
+            options: opts
+        });
+
+        // match each element's height to the tallest element in the selection
+        matchHeight._apply(this, opts);
+
+        return this;
+    };
+
+    /*
+    *  plugin global options
+    */
+
+    matchHeight._groups = [];
+    matchHeight._throttle = 80;
+    matchHeight._maintainScroll = false;
+    matchHeight._beforeUpdate = null;
+    matchHeight._afterUpdate = null;
+
+    /*
+    *  matchHeight._apply
+    *  apply matchHeight to given elements
+    */
+
+    matchHeight._apply = function(elements, options) {
+        var opts = _parseOptions(options),
+            $elements = $(elements),
+            rows = [$elements];
+
+        // take note of scroll position
+        var scrollTop = $(window).scrollTop(),
+            htmlHeight = $('html').outerHeight(true);
+
+        // get hidden parents
+        var $hiddenParents = $elements.parents().filter(':hidden');
+
+        // cache the original inline style
+        $hiddenParents.each(function() {
+            var $that = $(this);
+            $that.data('style-cache', $that.attr('style'));
+        });
+
+        // temporarily must force hidden parents visible
+        $hiddenParents.css('display', 'block');
+
+        // get rows if using byRow, otherwise assume one row
+        if (opts.byRow && !opts.target) {
+
+            // must first force an arbitrary equal height so floating elements break evenly
+            $elements.each(function() {
+                var $that = $(this),
+                    display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+
+                // cache the original inline style
+                $that.data('style-cache', $that.attr('style'));
+
+                $that.css({
+                    'display': display,
+                    'padding-top': '0',
+                    'padding-bottom': '0',
+                    'margin-top': '0',
+                    'margin-bottom': '0',
+                    'border-top-width': '0',
+                    'border-bottom-width': '0',
+                    'height': '100px'
+                });
+            });
+
+            // get the array of rows (based on element top position)
+            rows = _rows($elements);
+
+            // revert original inline styles
+            $elements.each(function() {
+                var $that = $(this);
+                $that.attr('style', $that.data('style-cache') || '');
+            });
+        }
+
+        $.each(rows, function(key, row) {
+            var $row = $(row),
+                targetHeight = 0;
+
+            if (!opts.target) {
+                // skip apply to rows with only one item
+                if (opts.byRow && $row.length <= 1) {
+                    $row.css(opts.property, '');
+                    return;
+                }
+
+                // iterate the row and find the max height
+                $row.each(function(){
+                    var $that = $(this),
+                        display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+
+                    // ensure we get the correct actual height (and not a previously set height value)
+                    var css = { 'display': display };
+                    css[opts.property] = '';
+                    $that.css(css);
+
+                    // find the max height (including padding, but not margin)
+                    if ($that.outerHeight(false) > targetHeight) {
+                        targetHeight = $that.outerHeight(false);
+                    }
+
+                    // revert display block
+                    $that.css('display', '');
+                });
+            } else {
+                // if target set, use the height of the target element
+                targetHeight = opts.target.outerHeight(false);
+            }
+
+            // iterate the row and apply the height to all elements
+            $row.each(function(){
+                var $that = $(this),
+                    verticalPadding = 0;
+
+                // don't apply to a target
+                if (opts.target && $that.is(opts.target)) {
+                    return;
+                }
+
+                // handle padding and border correctly (required when not using border-box)
+                if ($that.css('box-sizing') !== 'border-box') {
+                    verticalPadding += _parse($that.css('border-top-width')) + _parse($that.css('border-bottom-width'));
+                    verticalPadding += _parse($that.css('padding-top')) + _parse($that.css('padding-bottom'));
+                }
+
+                // set the height (accounting for padding and border)
+                $that.css(opts.property, targetHeight - verticalPadding);
+            });
+        });
+
+        // revert hidden parents
+        $hiddenParents.each(function() {
+            var $that = $(this);
+            $that.attr('style', $that.data('style-cache') || null);
+        });
+
+        // restore scroll position if enabled
+        if (matchHeight._maintainScroll) {
+            $(window).scrollTop((scrollTop / htmlHeight) * $('html').outerHeight(true));
+        }
+
+        return this;
+    };
+
+    /*
+    *  matchHeight._applyDataApi
+    *  applies matchHeight to all elements with a data-match-height attribute
+    */
+
+    matchHeight._applyDataApi = function() {
+        var groups = {};
+
+        // generate groups by their groupId set by elements using data-match-height
+        $('[data-match-height], [data-mh]').each(function() {
+            var $this = $(this),
+                groupId = $this.attr('data-mh') || $this.attr('data-match-height');
+
+            if (groupId in groups) {
+                groups[groupId] = groups[groupId].add($this);
+            } else {
+                groups[groupId] = $this;
+            }
+        });
+
+        // apply matchHeight to each group
+        $.each(groups, function() {
+            this.matchHeight(true);
+        });
+    };
+
+    /*
+    *  matchHeight._update
+    *  updates matchHeight on all current groups with their correct options
+    */
+
+    var _update = function(event) {
+        if (matchHeight._beforeUpdate) {
+            matchHeight._beforeUpdate(event, matchHeight._groups);
+        }
+
+        $.each(matchHeight._groups, function() {
+            matchHeight._apply(this.elements, this.options);
+        });
+
+        if (matchHeight._afterUpdate) {
+            matchHeight._afterUpdate(event, matchHeight._groups);
+        }
+    };
+
+    matchHeight._update = function(throttle, event) {
+        // prevent update if fired from a resize event
+        // where the viewport width hasn't actually changed
+        // fixes an event looping bug in IE8
+        if (event && event.type === 'resize') {
+            var windowWidth = $(window).width();
+            if (windowWidth === _previousResizeWidth) {
+                return;
+            }
+            _previousResizeWidth = windowWidth;
+        }
+
+        // throttle updates
+        if (!throttle) {
+            _update(event);
+        } else if (_updateTimeout === -1) {
+            _updateTimeout = setTimeout(function() {
+                _update(event);
+                _updateTimeout = -1;
+            }, matchHeight._throttle);
+        }
+    };
+
+    /*
+    *  bind events
+    */
+
+    // apply on DOM ready event
+    $(matchHeight._applyDataApi);
+
+    // update heights on load and resize events
+    $(window).bind('load', function(event) {
+        matchHeight._update(false, event);
+    });
+
+    // throttled update heights on resize events
+    $(window).bind('resize orientationchange', function(event) {
+        matchHeight._update(true, event);
+    });
+
+})(jQuery);
