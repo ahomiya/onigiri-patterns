@@ -162,9 +162,9 @@
   }
 }
 
-
-// Remark
-.patterns-remark {
+// Remark & issue
+.patterns-remark,
+.patterns-issue {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;
@@ -173,6 +173,23 @@
   margin-left: 5px;
   padding: 1px 4px;
 }
+
+
+// Remark
+.patterns-remark {
+  color: #999;
+}
+
+// Issues
+.patterns-issue {
+  background-color: transparent;
+  font-style: italic;
+}
+
+.is-todo       { color: #1c86ee; }
+.is-inprogress { color: green; }
+.is-testing    { color: #bc00f0; }
+.is-completed  { color: #000; }
 
 
 // Hightlight
