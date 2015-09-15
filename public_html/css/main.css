@@ -5111,6 +5111,24 @@ mark,
   width: 25%;
 }
 
+.sticky-outer,
+.sticky-body {
+  height: 100%;
+}
+
+.sticky-wrapper {
+  height: auto;
+  margin: 0 auto -180px auto;
+  min-height: 100%;
+  padding-bottom: 180px;
+  position: relative;
+}
+
+.sticky-footer {
+  height: 180px;
+  position: relative;
+}
+
 .cd-top {
   cursor: pointer;
   display: inline-block;
@@ -5208,8 +5226,7 @@ mark,
 }
 
 .patterns-main {
-  margin-top: 60px;
-  padding: 25px 0;
+  padding: 85px 0 25px 0;
 }
 
 .patterns-footer {
