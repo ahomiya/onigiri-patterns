@@ -3255,6 +3255,12 @@ mark,
   border-left-color: white;
 }
 
+.anchor-group {
+  border-bottom: #ccc solid 1px;
+  margin-bottom: 25px;
+  padding: 30px 0 10px 0;
+}
+
 /*!
  * animsition v3.6.0
  * A simple and easy jQuery plugin for CSS animated page transitions.
@@ -5305,6 +5311,11 @@ mark,
 
 .patterns-demo {
   padding-top: 50px;
+}
+
+.patterns-demo h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .patterns-example {
