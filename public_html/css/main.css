@@ -5340,7 +5340,8 @@ mark,
   margin-right: 15px;
 }
 
-.patterns-remark {
+.patterns-remark,
+.patterns-issue {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;
@@ -5348,6 +5349,31 @@ mark,
   font-size: 12px;
   margin-left: 5px;
   padding: 1px 4px;
+}
+
+.patterns-remark {
+  color: #999;
+}
+
+.patterns-issue {
+  background-color: transparent;
+  font-style: italic;
+}
+
+.is-todo {
+  color: #1c86ee;
+}
+
+.is-inprogress {
+  color: green;
+}
+
+.is-testing {
+  color: #bc00f0;
+}
+
+.is-completed {
+  color: #000;
 }
 
 .patterns-highlight {
