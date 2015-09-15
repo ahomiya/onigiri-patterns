@@ -18774,3 +18774,875 @@ window.scrollReveal = (function( window ){
 return scrollReveal;
 
 }));
+
+/*!
+ * jQuery.scrollTo
+ * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Licensed under MIT
+ * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
+ * @projectDescription Lightweight, cross-browser and highly customizable animated scrolling with jQuery
+ * @author Ariel Flesler
+ * @version 2.1.1
+ */
+;(function(factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['jquery'], factory);
+	} else if (typeof module !== 'undefined' && module.exports) {
+		// CommonJS
+		module.exports = factory(require('jquery'));
+	} else {
+		// Global
+		factory(jQuery);
+	}
+})(function($) {
+	'use strict';
+
+	var $scrollTo = $.scrollTo = function(target, duration, settings) {
+		return $(window).scrollTo(target, duration, settings);
+	};
+
+	$scrollTo.defaults = {
+		axis:'xy',
+		duration: 0,
+		limit:true
+	};
+
+	function isWin(elem) {
+		return !elem.nodeName ||
+			$.inArray(elem.nodeName.toLowerCase(), ['iframe','#document','html','body']) !== -1;
+	}		
+
+	$.fn.scrollTo = function(target, duration, settings) {
+		if (typeof duration === 'object') {
+			settings = duration;
+			duration = 0;
+		}
+		if (typeof settings === 'function') {
+			settings = { onAfter:settings };
+		}
+		if (target === 'max') {
+			target = 9e9;
+		}
+
+		settings = $.extend({}, $scrollTo.defaults, settings);
+		// Speed is still recognized for backwards compatibility
+		duration = duration || settings.duration;
+		// Make sure the settings are given right
+		var queue = settings.queue && settings.axis.length > 1;
+		if (queue) {
+			// Let's keep the overall duration
+			duration /= 2;
+		}
+		settings.offset = both(settings.offset);
+		settings.over = both(settings.over);
+
+		return this.each(function() {
+			// Null target yields nothing, just like jQuery does
+			if (target === null) return;
+
+			var win = isWin(this),
+				elem = win ? this.contentWindow || window : this,
+				$elem = $(elem),
+				targ = target, 
+				attr = {},
+				toff;
+
+			switch (typeof targ) {
+				// A number will pass the regex
+				case 'number':
+				case 'string':
+					if (/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ)) {
+						targ = both(targ);
+						// We are done
+						break;
+					}
+					// Relative/Absolute selector
+					targ = win ? $(targ) : $(targ, elem);
+					if (!targ.length) return;
+					/* falls through */
+				case 'object':
+					// DOMElement / jQuery
+					if (targ.is || targ.style) {
+						// Get the real position of the target
+						toff = (targ = $(targ)).offset();
+					}
+			}
+
+			var offset = $.isFunction(settings.offset) && settings.offset(elem, targ) || settings.offset;
+
+			$.each(settings.axis.split(''), function(i, axis) {
+				var Pos	= axis === 'x' ? 'Left' : 'Top',
+					pos = Pos.toLowerCase(),
+					key = 'scroll' + Pos,
+					prev = $elem[key](),
+					max = $scrollTo.max(elem, axis);
+
+				if (toff) {// jQuery / DOMElement
+					attr[key] = toff[pos] + (win ? 0 : prev - $elem.offset()[pos]);
+
+					// If it's a dom element, reduce the margin
+					if (settings.margin) {
+						attr[key] -= parseInt(targ.css('margin'+Pos), 10) || 0;
+						attr[key] -= parseInt(targ.css('border'+Pos+'Width'), 10) || 0;
+					}
+
+					attr[key] += offset[pos] || 0;
+
+					if (settings.over[pos]) {
+						// Scroll to a fraction of its width/height
+						attr[key] += targ[axis === 'x'?'width':'height']() * settings.over[pos];
+					}
+				} else {
+					var val = targ[pos];
+					// Handle percentage values
+					attr[key] = val.slice && val.slice(-1) === '%' ?
+						parseFloat(val) / 100 * max
+						: val;
+				}
+
+				// Number or 'number'
+				if (settings.limit && /^\d+$/.test(attr[key])) {
+					// Check the limits
+					attr[key] = attr[key] <= 0 ? 0 : Math.min(attr[key], max);
+				}
+
+				// Don't waste time animating, if there's no need.
+				if (!i && settings.axis.length > 1) {
+					if (prev === attr[key]) {
+						// No animation needed
+						attr = {};
+					} else if (queue) {
+						// Intermediate animation
+						animate(settings.onAfterFirst);
+						// Don't animate this axis again in the next iteration.
+						attr = {};
+					}
+				}
+			});
+
+			animate(settings.onAfter);
+
+			function animate(callback) {
+				var opts = $.extend({}, settings, {
+					// The queue setting conflicts with animate()
+					// Force it to always be true
+					queue: true,
+					duration: duration,
+					complete: callback && function() {
+						callback.call(elem, targ, settings);
+					}
+				});
+				$elem.animate(attr, opts);
+			}
+		});
+	};
+
+	// Max scrolling position, works on quirks mode
+	// It only fails (not too badly) on IE, quirks mode.
+	$scrollTo.max = function(elem, axis) {
+		var Dim = axis === 'x' ? 'Width' : 'Height',
+			scroll = 'scroll'+Dim;
+
+		if (!isWin(elem))
+			return elem[scroll] - $(elem)[Dim.toLowerCase()]();
+
+		var size = 'client' + Dim,
+			doc = elem.ownerDocument || elem.document,
+			html = doc.documentElement,
+			body = doc.body;
+
+		return Math.max(html[scroll], body[scroll]) - Math.min(html[size], body[size]);
+	};
+
+	function both(val) {
+		return $.isFunction(val) || $.isPlainObject(val) ? val : { top:val, left:val };
+	}
+
+	// Add special hooks so that window scroll properties can be animated
+	$.Tween.propHooks.scrollLeft = 
+	$.Tween.propHooks.scrollTop = {
+		get: function(t) {
+			return $(t.elem)[t.prop]();
+		},
+		set: function(t) {
+			var curr = this.get(t);
+			// If interrupt is true and user scrolled, stop animating
+			if (t.options.interrupt && t._last && t._last !== curr) {
+				return $(t.elem).stop();
+			}
+			var next = Math.round(t.now);
+			// Don't waste CPU
+			// Browsers don't render floating point scroll
+			if (curr !== next) {
+				$(t.elem)[t.prop](next);
+				t._last = this.get(t);
+			}
+		}
+	};
+
+	// AMD requirement
+	return $scrollTo;
+});
+
+/*!
+ * animsition v3.6.0
+ * A simple and easy jQuery plugin for CSS animated page transitions.
+ * http://blivesta.github.io/animsition
+ * License : MIT
+ * Author : blivesta (http://blivesta.com/)
+ */
+;(function (factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
+  } else {
+    factory(jQuery);
+  }
+}(function ($) {
+  'use strict';
+  var namespace = 'animsition';
+  var methods = {
+    init: function(options){
+      options = $.extend({
+        inClass               :   'fade-in',
+        outClass              :   'fade-out',
+        inDuration            :    1500,
+        outDuration           :    800,
+        linkElement           :   '.animsition-link',
+        // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
+        loading               :    true,
+        loadingParentElement  :   'body', //animsition wrapper element
+        loadingClass          :   'animsition-loading',
+        unSupportCss          : [ 'animation-duration',
+                                  '-webkit-animation-duration',
+                                  '-o-animation-duration'],
+        overlay               :   false,
+        overlayClass          :   'animsition-overlay-slide',
+        overlayParentElement  :   'body'
+      }, options);
+
+      // Remove the "Animsition" in a browser
+      // that does not support the "animaition-duration".
+      var support = methods.supportCheck.call(this, options);
+
+      if(!support && options.unSupportCss.length > 0){
+        if(!support || !this.length){
+          // If do not have a console object to object window
+          if (!('console' in window)) {
+            window.console = {};
+            window.console.log = function(str){ return str; };
+          }
+          if(!this.length){
+            console.log('Animsition: Element does not exist on page.');
+          }
+          if(!support){
+            console.log('Animsition: Does not support this browser.');
+          }
+          return methods.destroy.call(this);
+        }
+      }
+
+      var overlayMode = methods.optionCheck.call(this, options);
+      if(overlayMode) {
+        methods.addOverlay.call(this, options);
+      }
+
+      if(options.loading) {
+        methods.addLoading.call(this, options);
+      }
+
+      return this.each(function(){
+        var _this = this;
+        var $this = $(this);
+        var $window = $(window);
+        var data = $this.data(namespace);
+
+        if (!data) {
+          options = $.extend({}, options);
+
+          $this.data(namespace, {
+            options: options
+          });
+
+          $window.on('load.' + namespace + ' pageshow.' + namespace, function() {
+            methods.pageIn.call( _this );
+          });
+
+          // Firefox back button issue #4
+          $window.on('unload.' + namespace, function() { });
+
+          $(options.linkElement).on('click.' + namespace, function(event) {
+            event.preventDefault();
+            var $self = $(this);
+            var url = $self.attr('href');
+
+            // middle mouse button issue #24
+            // if(middle mouse button || command key || shift key || win control key)
+            if (event.which === 2 || event.metaKey || event.shiftKey || navigator.platform.toUpperCase().indexOf('WIN') !== -1 && event.ctrlKey) {
+              window.open(url, '_blank');
+            } else {
+              methods.pageOut.call(_this,$self,url);
+            }
+
+          });
+        }
+      }); // end each
+    },
+
+    addOverlay: function(options){
+      $(options.overlayParentElement).prepend('<div class="'+options.overlayClass+'"></div>');
+    },
+
+    addLoading: function(options){
+      $(options.loadingParentElement).append('<div class="'+options.loadingClass+'"></div>');
+    },
+
+    removeLoading: function(){
+      var $this     = $(this);
+      var options   = $this.data(namespace).options;
+      var $loading  = $(options.loadingParentElement).children('.' + options.loadingClass);
+      $loading.fadeOut().remove();
+    },
+
+    supportCheck: function(options){
+      var $this = $(this);
+      var props = options.unSupportCss;
+      var propsNum = props.length;
+      var support  = false;
+
+      if (propsNum === 0) {
+        support = true;
+      }
+      for (var i = 0; i < propsNum; i++) {
+        if (typeof $this.css(props[i]) === 'string') {
+          support = true;
+          break;
+        }
+      }
+      return support;
+    },
+
+    optionCheck: function(options){
+      var $this = $(this);
+      var overlayMode;
+      if(options.overlay || $this.data('animsition-overlay')){
+        overlayMode = true;
+      } else {
+        overlayMode = false;
+      }
+      return overlayMode;
+    },
+
+    animationCheck : function(data, stateClass, stateIn){
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var dataType = typeof data;
+      var dataDuration = !stateClass && dataType === 'number';
+      var dataClass = stateClass && dataType === 'string' && data.length > 0;
+
+      if(dataDuration || dataClass){
+        data = data;
+      } else if(stateClass && stateIn) {
+        data = options.inClass;
+      } else if(!stateClass && stateIn) {
+        data = options.inDuration;
+      } else if(stateClass && !stateIn) {
+        data = options.outClass;
+      } else if(!stateClass && !stateIn) {
+        data = options.outDuration;
+      }
+      return data;
+    },
+
+    pageIn: function(){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var thisInDuration = $this.data('animsition-in-duration');
+      var thisInClass = $this.data('animsition-in');
+      var inDuration = methods.animationCheck.call(_this,thisInDuration,false,true);
+      var inClass = methods.animationCheck.call(_this,thisInClass,true,true);
+      var overlayMode = methods.optionCheck.call(_this, options);
+
+      if(options.loading) {
+        methods.removeLoading.call(_this);
+      }
+
+      if(overlayMode) {
+        methods.pageInOverlay.call(_this,inClass,inDuration);
+      } else {
+        methods.pageInBasic.call(_this,inClass,inDuration);
+      }
+    },
+
+    pageInBasic: function(inClass,inDuration){
+      var $this = $(this);
+
+      $this
+        .trigger('animsition.start')
+        .css({ 'animation-duration' : (inDuration / 1000) + 's' })
+        .addClass(inClass)
+        .animateCallback(function(){
+          $this
+            .removeClass(inClass)
+            .css({ 'opacity' : 1 })
+            .trigger('animsition.end');
+        });
+    },
+
+    pageInOverlay: function(inClass,inDuration){
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+
+      $this
+        .trigger('animsition.start')
+        .css({ 'opacity' : 1 });
+
+      $(options.overlayParentElement)
+        .children('.' + options.overlayClass)
+        .css({ 'animation-duration' : (inDuration / 1000) + 's' })
+        .addClass(inClass)
+        .animateCallback(function(){
+          $this.trigger('animsition.end');
+        });
+    },
+
+    pageOut: function($self,url){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var selfOutClass = $self.data('animsition-out');
+      var thisOutClass = $this.data('animsition-out');
+      var selfOutDuration = $self.data('animsition-out-duration');
+      var thisOutDuration = $this.data('animsition-out-duration');
+      var isOutClass = selfOutClass ? selfOutClass : thisOutClass;
+      var isOutDuration = selfOutDuration ? selfOutDuration : thisOutDuration;
+      var outClass = methods.animationCheck.call(_this,isOutClass,true,false);
+      var outDuration = methods.animationCheck.call(_this, isOutDuration,false,false);
+      var overlayMode = methods.optionCheck.call(_this, options);
+
+      if(overlayMode) {
+        methods.pageOutOverlay.call(_this,outClass,outDuration,url);
+      } else {
+        methods.pageOutBasic.call(_this,outClass,outDuration,url);
+      }
+    },
+
+    pageOutBasic: function(outClass,outDuration,url){
+      var $this = $(this);
+
+      $this
+        .css({ 'animation-duration' : (outDuration / 1000) + 's' })
+        .addClass(outClass)
+        .animateCallback(function(){
+          location.href = url;
+        });
+    },
+
+    pageOutOverlay: function(outClass,outDuration,url){
+      var _this = this;
+      var $this = $(this);
+      var options = $this.data(namespace).options;
+      var thisInClass = $this.data('animsition-in');
+      var inClass = methods.animationCheck.call(_this,thisInClass,true,true);
+
+      $(options.overlayParentElement).children('.' + options.overlayClass)
+        .css({ 'animation-duration' : (outDuration / 1000) + 's' })
+        .removeClass(inClass)
+        .addClass(outClass)
+        .animateCallback(function(){
+          location.href = url;
+        });
+    },
+
+    destroy: function(){
+      return this.each(function(){
+        var $this = $(this);
+        $(window).unbind('.'+namespace);
+        $this
+          .css({'opacity':1})
+          .removeData(namespace);
+      });
+    }
+
+  };
+
+  $.fn.animateCallback = function(callback){
+    var end = 'animationend webkitAnimationEnd mozAnimationEnd oAnimationEnd MSAnimationEnd';
+    return this.each(function() {
+      $(this).bind(end, function(){
+        $(this).unbind(end);
+        return callback.call(this);
+      });
+    });
+  };
+
+  $.fn.animsition = function(method){
+    if ( methods[method] ) {
+      return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof method === 'object' || ! method ) {
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  method + ' does not exist on jQuery.'+namespace);
+    }
+  };
+
+}));
+
+/**
+* jquery.matchHeight.js master
+* http://brm.io/jquery-match-height/
+* License: MIT
+*/
+
+;(function($) {
+    /*
+    *  internal
+    */
+
+    var _previousResizeWidth = -1,
+        _updateTimeout = -1;
+
+    /*
+    *  _parse
+    *  value parse utility function
+    */
+
+    var _parse = function(value) {
+        // parse value and convert NaN to 0
+        return parseFloat(value) || 0;
+    };
+
+    /*
+    *  _rows
+    *  utility function returns array of jQuery selections representing each row
+    *  (as displayed after float wrapping applied by browser)
+    */
+
+    var _rows = function(elements) {
+        var tolerance = 1,
+            $elements = $(elements),
+            lastTop = null,
+            rows = [];
+
+        // group elements by their top position
+        $elements.each(function(){
+            var $that = $(this),
+                top = $that.offset().top - _parse($that.css('margin-top')),
+                lastRow = rows.length > 0 ? rows[rows.length - 1] : null;
+
+            if (lastRow === null) {
+                // first item on the row, so just push it
+                rows.push($that);
+            } else {
+                // if the row top is the same, add to the row group
+                if (Math.floor(Math.abs(lastTop - top)) <= tolerance) {
+                    rows[rows.length - 1] = lastRow.add($that);
+                } else {
+                    // otherwise start a new row group
+                    rows.push($that);
+                }
+            }
+
+            // keep track of the last row top
+            lastTop = top;
+        });
+
+        return rows;
+    };
+
+    /*
+    *  _parseOptions
+    *  handle plugin options
+    */
+
+    var _parseOptions = function(options) {
+        var opts = {
+            byRow: true,
+            property: 'height',
+            target: null,
+            remove: false
+        };
+
+        if (typeof options === 'object') {
+            return $.extend(opts, options);
+        }
+
+        if (typeof options === 'boolean') {
+            opts.byRow = options;
+        } else if (options === 'remove') {
+            opts.remove = true;
+        }
+
+        return opts;
+    };
+
+    /*
+    *  matchHeight
+    *  plugin definition
+    */
+
+    var matchHeight = $.fn.matchHeight = function(options) {
+        var opts = _parseOptions(options);
+
+        // handle remove
+        if (opts.remove) {
+            var that = this;
+
+            // remove fixed height from all selected elements
+            this.css(opts.property, '');
+
+            // remove selected elements from all groups
+            $.each(matchHeight._groups, function(key, group) {
+                group.elements = group.elements.not(that);
+            });
+
+            // TODO: cleanup empty groups
+
+            return this;
+        }
+
+        if (this.length <= 1 && !opts.target) {
+            return this;
+        }
+
+        // keep track of this group so we can re-apply later on load and resize events
+        matchHeight._groups.push({
+            elements: this,
+            options: opts
+        });
+
+        // match each element's height to the tallest element in the selection
+        matchHeight._apply(this, opts);
+
+        return this;
+    };
+
+    /*
+    *  plugin global options
+    */
+
+    matchHeight._groups = [];
+    matchHeight._throttle = 80;
+    matchHeight._maintainScroll = false;
+    matchHeight._beforeUpdate = null;
+    matchHeight._afterUpdate = null;
+
+    /*
+    *  matchHeight._apply
+    *  apply matchHeight to given elements
+    */
+
+    matchHeight._apply = function(elements, options) {
+        var opts = _parseOptions(options),
+            $elements = $(elements),
+            rows = [$elements];
+
+        // take note of scroll position
+        var scrollTop = $(window).scrollTop(),
+            htmlHeight = $('html').outerHeight(true);
+
+        // get hidden parents
+        var $hiddenParents = $elements.parents().filter(':hidden');
+
+        // cache the original inline style
+        $hiddenParents.each(function() {
+            var $that = $(this);
+            $that.data('style-cache', $that.attr('style'));
+        });
+
+        // temporarily must force hidden parents visible
+        $hiddenParents.css('display', 'block');
+
+        // get rows if using byRow, otherwise assume one row
+        if (opts.byRow && !opts.target) {
+
+            // must first force an arbitrary equal height so floating elements break evenly
+            $elements.each(function() {
+                var $that = $(this),
+                    display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+
+                // cache the original inline style
+                $that.data('style-cache', $that.attr('style'));
+
+                $that.css({
+                    'display': display,
+                    'padding-top': '0',
+                    'padding-bottom': '0',
+                    'margin-top': '0',
+                    'margin-bottom': '0',
+                    'border-top-width': '0',
+                    'border-bottom-width': '0',
+                    'height': '100px'
+                });
+            });
+
+            // get the array of rows (based on element top position)
+            rows = _rows($elements);
+
+            // revert original inline styles
+            $elements.each(function() {
+                var $that = $(this);
+                $that.attr('style', $that.data('style-cache') || '');
+            });
+        }
+
+        $.each(rows, function(key, row) {
+            var $row = $(row),
+                targetHeight = 0;
+
+            if (!opts.target) {
+                // skip apply to rows with only one item
+                if (opts.byRow && $row.length <= 1) {
+                    $row.css(opts.property, '');
+                    return;
+                }
+
+                // iterate the row and find the max height
+                $row.each(function(){
+                    var $that = $(this),
+                        display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+
+                    // ensure we get the correct actual height (and not a previously set height value)
+                    var css = { 'display': display };
+                    css[opts.property] = '';
+                    $that.css(css);
+
+                    // find the max height (including padding, but not margin)
+                    if ($that.outerHeight(false) > targetHeight) {
+                        targetHeight = $that.outerHeight(false);
+                    }
+
+                    // revert display block
+                    $that.css('display', '');
+                });
+            } else {
+                // if target set, use the height of the target element
+                targetHeight = opts.target.outerHeight(false);
+            }
+
+            // iterate the row and apply the height to all elements
+            $row.each(function(){
+                var $that = $(this),
+                    verticalPadding = 0;
+
+                // don't apply to a target
+                if (opts.target && $that.is(opts.target)) {
+                    return;
+                }
+
+                // handle padding and border correctly (required when not using border-box)
+                if ($that.css('box-sizing') !== 'border-box') {
+                    verticalPadding += _parse($that.css('border-top-width')) + _parse($that.css('border-bottom-width'));
+                    verticalPadding += _parse($that.css('padding-top')) + _parse($that.css('padding-bottom'));
+                }
+
+                // set the height (accounting for padding and border)
+                $that.css(opts.property, targetHeight - verticalPadding);
+            });
+        });
+
+        // revert hidden parents
+        $hiddenParents.each(function() {
+            var $that = $(this);
+            $that.attr('style', $that.data('style-cache') || null);
+        });
+
+        // restore scroll position if enabled
+        if (matchHeight._maintainScroll) {
+            $(window).scrollTop((scrollTop / htmlHeight) * $('html').outerHeight(true));
+        }
+
+        return this;
+    };
+
+    /*
+    *  matchHeight._applyDataApi
+    *  applies matchHeight to all elements with a data-match-height attribute
+    */
+
+    matchHeight._applyDataApi = function() {
+        var groups = {};
+
+        // generate groups by their groupId set by elements using data-match-height
+        $('[data-match-height], [data-mh]').each(function() {
+            var $this = $(this),
+                groupId = $this.attr('data-mh') || $this.attr('data-match-height');
+
+            if (groupId in groups) {
+                groups[groupId] = groups[groupId].add($this);
+            } else {
+                groups[groupId] = $this;
+            }
+        });
+
+        // apply matchHeight to each group
+        $.each(groups, function() {
+            this.matchHeight(true);
+        });
+    };
+
+    /*
+    *  matchHeight._update
+    *  updates matchHeight on all current groups with their correct options
+    */
+
+    var _update = function(event) {
+        if (matchHeight._beforeUpdate) {
+            matchHeight._beforeUpdate(event, matchHeight._groups);
+        }
+
+        $.each(matchHeight._groups, function() {
+            matchHeight._apply(this.elements, this.options);
+        });
+
+        if (matchHeight._afterUpdate) {
+            matchHeight._afterUpdate(event, matchHeight._groups);
+        }
+    };
+
+    matchHeight._update = function(throttle, event) {
+        // prevent update if fired from a resize event
+        // where the viewport width hasn't actually changed
+        // fixes an event looping bug in IE8
+        if (event && event.type === 'resize') {
+            var windowWidth = $(window).width();
+            if (windowWidth === _previousResizeWidth) {
+                return;
+            }
+            _previousResizeWidth = windowWidth;
+        }
+
+        // throttle updates
+        if (!throttle) {
+            _update(event);
+        } else if (_updateTimeout === -1) {
+            _updateTimeout = setTimeout(function() {
+                _update(event);
+                _updateTimeout = -1;
+            }, matchHeight._throttle);
+        }
+    };
+
+    /*
+    *  bind events
+    */
+
+    // apply on DOM ready event
+    $(matchHeight._applyDataApi);
+
+    // update heights on load and resize events
+    $(window).bind('load', function(event) {
+        matchHeight._update(false, event);
+    });
+
+    // throttled update heights on resize events
+    $(window).bind('resize orientationchange', function(event) {
+        matchHeight._update(true, event);
+    });
+
+})(jQuery);
