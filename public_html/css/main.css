@@ -5111,6 +5111,14 @@ mark,
   width: 25%;
 }
 
+.sticky-element {
+  background-color: green;
+  display: block;
+  height: 100px;
+  padding: 15px;
+  width: 100px;
+}
+
 .sticky-outer,
 .sticky-body {
   height: 100%;
