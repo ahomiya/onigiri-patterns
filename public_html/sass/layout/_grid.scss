@@ -2,3 +2,56 @@
 // A structure made up of a series of intersecting guide lines used to
 // structure content.
 // -----------------------------------------------------------------------------
+
+.container {
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    max-width: 1156px;
+  }
+}
+
+.row {
+  @include clearfix;
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
+  min-height: 1px;
+  padding-left: .9375rem;
+  padding-right: .9375rem;
+  position: relative;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    float: left;
+  }
+}
+
+.col-6 {
+  @media (min-width: 768px) {
+    width: (100% / 2);
+  }
+}
+
+.col-4 {
+  @media (min-width: 768px) {
+    width: (100% / 3);
+  }
+}
+
+.col-3 {
+  @media (min-width: 768px) {
+    width: (100% / 4);
+  }
+}
