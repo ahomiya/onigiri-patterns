@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Spinner · Components · ahomiya.com</title>
+    <title>Spinner · Onigiri</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
@@ -13,15 +13,96 @@
     <script src="../js/vendor/libraries.features.js"></script>
   </head>
   <body>
-    <h1>Spinner</h1>
-    <ul>
-      <li>Prototype: Spin.js</li>
-      <li>Bower: spin.js</li>
-      <li><a href="http://fgnass.github.io/spin.js/" target="_blank">Documentation</a></li>
-      <li><a href="https://github.com/fgnass/spin.js" target="_blank">Repository</a></li>
-    </ul>
+    <!-- Header -->
+    <header class="patterns-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <nav>
+              <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="http://github.com/ahomiya/patterns-patterns" target="_blank">GitHub</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-6">
+            <div class="nav-meta">おにぎり Patterns</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /Header -->
 
-    <div id="spinner"></div>
+    <!-- Main content -->
+    <main class="patterns-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Headset -->
+            <div class="patterns-headset">
+              <h1 class="patterns-title">Spinner <sup class="ture">JavaScript</sup> <sup class="false">CSS</sup></h1>
+              <table class="patterns-table">
+                <tbody>
+                  <tr>
+                    <th scope="col">Plugin</th>
+                    <td><i>:</i>Spin.js</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required library</th>
+                    <td><i>:</i><code>false</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required CSS</th>
+                    <td><i>:</i><code>false</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Documentation</th>
+                    <td><i>:</i><a href="http://fgnass.github.io/spin.js/" target="_blank">http://fgnass.github.io/spin.js/</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Repository</th>
+                    <td><i>:</i><a href="https://github.com/fgnass/spin.js" target="_blank">https://github.com/fgnass/spin.js</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Bower</th>
+                    <td><i>:</i><code>bower install spin.js --save</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Last updated</th>
+                    <td><i>:</i>2015.09.15 by me@ahomiya.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /Headset -->
+
+            <!-- Demo -->
+            <div class="patterns-demo">
+              <h2>Demo</h2>
+              <div style="height: 55px">
+                <div id="spinner"></div>
+              </div>
+            </div>
+            <!-- /Demo -->
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- /Main content -->
+
+    <!-- Footer -->
+    <footer class="patterns-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>Onigiri Patterns</strong></p>
+            <p>Designed and built with all the love in the world by ahomiya.com.<br> Maintained by <a href="mailto:&#104;&#097;&#116;&#115;&#117;&#107;&#111;&#105;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Hatsukoi</a> &amp; <a href="mailto:&#107;&#097;&#105;&#046;&#115;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Kai.S</a></p>
+            <p><small><a href="http://www.ahomiya.com">ahomiya.com</a> © 2015</small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- /Footer -->
 
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
@@ -32,15 +113,17 @@
     <script>
       $(document).ready(function() {
 
-        // Plugin        : spin.js
-        // Documentation : http://fgnass.github.io/spin.js/
-        // Repository    : https://github.com/fgnass/spin.js
-        var spinnerOptions = {
+        /**
+         * Plugin        : Spin.js
+         * Documentation : http://fgnass.github.io/spin.js/
+         * Repository    : https://github.com/fgnass/spin.js
+         */
+        const spinnerOptions = {
           lines      : 13,        // The number of lines to draw
           length     : 28,        // The length of each line
           width      : 14,        // The line thickness
           radius     : 42,        // The radius of the inner circle
-          scale      : 1,         // Scales overall size of the spinner
+          scale      : 0.25,      // Scales overall size of the spinner
           corners    : 1,         // Corner roundness (0..1)
           color      : '#000',    // #rgb or #rrggbb or array of colors
           opacity    : 0.25,      // Opacity of the lines
@@ -51,15 +134,15 @@
           fps        : 20,        // Frames per second when using setTimeout() as a fallback for CSS
           zIndex     : 2e9,       // The z-index (defaults to 2000000000)
           className  : 'spinner', // The CSS class to assign to the spinner
-          top        : '50%',     // Top position relative to parent
-          left       : '50%',     // Left position relative to parent
+          top        : '140px',   // Top position relative to parent
+          left       : '20px',    // Left position relative to parent
           shadow     : false,     // Whether to render a shadow
           hwaccel    : false,     // Whether to use hardware acceleration
           position   : 'absolute' // Element positioning
         }
 
-        var spinnerTarget = document.getElementById('spinner'),
-            spinner       = new Spinner(spinnerOptions).spin(spinnerTarget);
+        const spinnerTarget = document.getElementById('spinner');
+        const spinner       = new Spinner(spinnerOptions).spin(spinnerTarget);
 
       });
     </script>

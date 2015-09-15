@@ -5311,6 +5311,7 @@ mark,
 
 .patterns-demo {
   padding-top: 50px;
+  position: relative;
 }
 
 .patterns-demo h2 {
