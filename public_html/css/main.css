@@ -1977,6 +1977,29 @@ mark,
   padding: 8px 10px;
 }
 
+.tooltipster-arrow-right span,
+.tooltipster-arrow-right .tooltipster-arrow-border {
+  left: -8px;
+}
+
+.tooltipster-light {
+  border-radius: 2px;
+}
+
+.tooltipster-light .tooltipster-content {
+  padding: 15px 10px 8px 10px;
+}
+
+.tooltipster-light .tooltipster-content h3 {
+  font-size: 18px;
+  margin-bottom: .75rem;
+}
+
+.tooltipster-light .tooltipster-content p {
+  line-height: 1.25;
+  margin-bottom: .5rem;
+}
+
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

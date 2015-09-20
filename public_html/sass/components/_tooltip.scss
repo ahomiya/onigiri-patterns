@@ -9,3 +9,25 @@
 // Vendor
 @import "./components/package/tooltipster/css/tooltipster";
 @import "./components/package/tooltipster/css/themes/tooltipster-light";
+
+// Demo
+.tooltipster-arrow-right span,
+.tooltipster-arrow-right .tooltipster-arrow-border {
+  left: -8px;
+}
+
+.tooltipster-light {
+  border-radius: 2px;
+
+  .tooltipster-content {
+    padding: 15px 10px 8px 10px;
+    h3 {
+      font-size: 18px;
+      margin-bottom: .75rem;
+    }
+    p {
+      line-height: 1.25;
+      margin-bottom: .5rem;
+    }
+  }
+}
