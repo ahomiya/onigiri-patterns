@@ -9,3 +9,27 @@
 
 // Vendor
 @import "./components/package/jquery.ui/themes/base/datepicker";
+
+// Demo
+.ui-datepicker {
+  margin-top: .2rem;
+  &.ui-widget-content {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    .ui-state-highlight {
+      background-color: #eee;
+    }
+    .ui-state-hover {
+      background-color: #0275d8;
+      color: #fff;
+    }
+  }
+
+  td {
+    span,
+    a {
+      background-color: #eee;
+      min-width: 35px;
+    }
+  }
+}
