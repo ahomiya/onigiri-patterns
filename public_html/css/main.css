@@ -3118,6 +3118,15 @@ mark,
   opacity: 0.75;
 }
 
+.slick-prev:before,
+.slick-next:before {
+  color: #563d7c;
+}
+
+.slick-initialized .slick-slide {
+  outline: none;
+}
+
 /*** ESSENTIAL STYLES ***/
 .sf-menu, .sf-menu * {
   margin: 0;
