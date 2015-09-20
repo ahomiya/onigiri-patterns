@@ -9,3 +9,13 @@
 // Vendor
 @import "./components/package/slick.js/slick/slick";
 @import "./components/package/slick.js/slick/slick-theme";
+
+// Demo
+.slick-prev:before,
+.slick-next:before {
+  color: #563d7c;
+}
+
+.slick-initialized .slick-slide {
+  outline: none;
+}

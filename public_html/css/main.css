@@ -1036,6 +1036,11 @@ button.close {
   clear: both;
 }
 
+.row .row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .col-1,
 .col-2,
 .col-3,
@@ -1069,6 +1074,18 @@ button.close {
   .col-11,
   .col-12 {
     float: left;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-9 {
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-8 {
+    width: 66.66667%;
   }
 }
 
@@ -3101,6 +3118,15 @@ mark,
   opacity: 0.75;
 }
 
+.slick-prev:before,
+.slick-next:before {
+  color: #563d7c;
+}
+
+.slick-initialized .slick-slide {
+  outline: none;
+}
+
 /*** ESSENTIAL STYLES ***/
 .sf-menu, .sf-menu * {
   margin: 0;
@@ -3236,6 +3262,12 @@ mark,
 .sf-arrows ul li:hover > .sf-with-ul:after,
 .sf-arrows ul .sfHover > .sf-with-ul:after {
   border-left-color: white;
+}
+
+.anchor-group {
+  border-bottom: #ccc solid 1px;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
 }
 
 /*!
@@ -5111,6 +5143,34 @@ mark,
   width: 25%;
 }
 
+.sticky-element {
+  background-color: #563d7c;
+  color: #fff;
+  display: block;
+  height: 100px;
+  max-width: 258px;
+  padding: 15px;
+  width: 100%;
+}
+
+.sticky-outer,
+.sticky-body {
+  height: 100%;
+}
+
+.sticky-container {
+  height: auto;
+  margin: 0 auto -180px auto;
+  min-height: 100%;
+  padding-bottom: 180px;
+  position: relative;
+}
+
+.sticky-footer {
+  height: 180px;
+  position: relative;
+}
+
 .cd-top {
   cursor: pointer;
   display: inline-block;
@@ -5156,11 +5216,17 @@ mark,
 
 .patterns-docs h3 {
   font-size: 1.25rem;
-  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+}
+
+.patterns-docs h4 {
+  font-size: 1rem;
+  padding-top: 1rem;
 }
 
 .patterns-docs h2 + ul,
-.patterns-docs h3 + ul {
+.patterns-docs h3 + ul,
+.patterns-docs h4 + ul {
   padding-top: 10px;
 }
 
@@ -5208,8 +5274,7 @@ mark,
 }
 
 .patterns-main {
-  margin-top: 60px;
-  padding: 25px 0;
+  padding: 85px 0 25px 0;
 }
 
 .patterns-footer {
@@ -5260,7 +5325,18 @@ mark,
 }
 
 .patterns-demo {
+  padding-bottom: 15px;
   padding-top: 50px;
+  position: relative;
+}
+
+.patterns-demo h2 {
+  margin-bottom: 2.5rem;
+}
+
+.patterns-demo h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .patterns-example {
@@ -5296,7 +5372,8 @@ mark,
   margin-right: 15px;
 }
 
-.patterns-remark {
+.patterns-remark,
+.patterns-issue {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;
@@ -5304,6 +5381,31 @@ mark,
   font-size: 12px;
   margin-left: 5px;
   padding: 1px 4px;
+}
+
+.patterns-remark {
+  color: #999;
+}
+
+.patterns-issue {
+  background-color: transparent;
+  font-style: italic;
+}
+
+.is-todo {
+  color: #1c86ee;
+}
+
+.is-inprogress {
+  color: green;
+}
+
+.is-testing {
+  color: #bc00f0;
+}
+
+.is-completed {
+  color: #000;
 }
 
 .patterns-highlight {

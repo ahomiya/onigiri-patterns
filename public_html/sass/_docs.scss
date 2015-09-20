@@ -9,11 +9,17 @@
 
   h3 {
     font-size: 1.25rem;
-    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    padding-top: 1rem;
   }
 
   h2,
-  h3 {
+  h3,
+  h4 {
     + ul {
       padding-top: 10px;
     }
@@ -67,8 +73,7 @@
 
 // Main content
 .patterns-main {
-  margin-top: 60px;
-  padding: 25px 0;
+  padding: 85px 0 25px 0;
 }
 
 
@@ -126,7 +131,27 @@
 
 // Demo
 .patterns-demo {
+  padding-bottom: 15px;
   padding-top: 50px;
+  position: relative;
+
+  h2 {
+    margin-bottom: 2.5rem;
+    // &::after {
+    //   background-color: #563d7c;
+    //   content: "";
+    //   display: block;
+    //   height: 3px;
+    //   position: relative;
+    //   top: 1px;
+    //   width: 88px;
+    // }
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
 }
 
 
@@ -163,9 +188,9 @@
   }
 }
 
-
-// Remark
-.patterns-remark {
+// Remark & issue
+.patterns-remark,
+.patterns-issue {
   background-color: #eee;
   border-radius: .25rem;
   color: #999;
@@ -174,6 +199,23 @@
   margin-left: 5px;
   padding: 1px 4px;
 }
+
+
+// Remark
+.patterns-remark {
+  color: #999;
+}
+
+// Issues
+.patterns-issue {
+  background-color: transparent;
+  font-style: italic;
+}
+
+.is-todo       { color: #1c86ee; }
+.is-inprogress { color: green; }
+.is-testing    { color: #bc00f0; }
+.is-completed  { color: #000; }
 
 
 // Hightlight

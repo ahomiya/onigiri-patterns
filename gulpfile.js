@@ -100,7 +100,8 @@ var components      = {
       componentPackage + '/scroll-reveal/dist/scrollReveal.js',
       componentPackage + '/jquery.scrollTo/jquery.scrollTo.js',
       componentPackage + '/animsition/dist/js/jquery.animsition.js',
-      componentPackage + '/matchheight/jquery.matchHeight.js'
+      componentPackage + '/matchheight/jquery.matchHeight.js',
+      componentPackage + '/sticky/jquery.sticky.js'
     ]
   }
 
