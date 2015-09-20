@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Accordion · Components · ahomiya.com</title>
+    <title>Accordion · Onigiri</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
@@ -13,63 +13,161 @@
     <script src="../js/vendor/libraries.features.js"></script>
   </head>
   <body>
-    <h1>Accordion</h1>
-    <ul>
-      <li>Prototype: jQuery UI</li>
-      <li>Bower: jquery.ui</li>
-      <li><a href="https://jqueryui.com/accordion/" target="_blank">Documentation</a></li>
-      <li><a href="http://api.jqueryui.com/accordion/" target="_blank">API</a></li>
-      <li><a href="https://github.com/jquery/jquery-ui" target="_blank">Repository</a></li>
-    </ul>
+    <!-- Header -->
+    <header class="patterns-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <nav>
+              <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="http://github.com/ahomiya/patterns-patterns" target="_blank">GitHub</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-6">
+            <div class="nav-meta">おにぎり Patterns</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /Header -->
 
-    <div id="accordion">
-      <h3>Section 1</h3>
-      <div>
-        <p>
-        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-        </p>
+    <!-- Main content -->
+    <main class="patterns-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Headset -->
+            <div class="patterns-headset">
+              <h1 class="patterns-title">Accordion <sup class="ture">jQuery</sup> <sup class="true">CSS</sup></h1>
+              <div class="patterns-description">
+                <p>Displays collapsible content panels for presenting information in a limited amount of space.</p>
+              </div>
+              <table class="patterns-table">
+                <tbody>
+                  <tr>
+                    <th scope="col">Plugin</th>
+                    <td><i>:</i>jQuery UI - Accordion</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required library</th>
+                    <td><i>:</i>jQuery</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required dependency</th>
+                    <td><i>:</i>jQuery UI - Core, jQuery UI - Widget</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required CSS</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Theme</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Responsiveness</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Documentation</th>
+                    <td><i>:</i><a href="https://jqueryui.com/accordion/" target="_blank">https://jqueryui.com/accordion/</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">API</th>
+                    <td><i>:</i><a href="http://api.jqueryui.com/accordion/" target="_blank">http://api.jqueryui.com/accordion/</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Repository</th>
+                    <td><i>:</i><a href="https://github.com/jquery/jquery-ui" target="_blank">https://github.com/jquery/jquery-ui</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Bower</th>
+                    <td><i>:</i><code>bower install jquery.ui --save</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Version</th>
+                    <td><i>:</i>1.11.4</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Last updated</th>
+                    <td><i>:</i>2015.09.20 by me@ahomiya.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /Headset -->
+
+            <!-- Demo -->
+            <div class="patterns-demo">
+              <h2>Demo</h2>
+
+              <!-- Component -->
+              <div id="accordion">
+                <h3>Section 1</h3>
+                <div>
+                  <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                  ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                  amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                  odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                  <p><img src="../img/demo/pix-001.jpg" alt="Pix 001"></p>
+                </div>
+                <h3>Section 2</h3>
+                <div>
+                  <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                  purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                  velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                  suscipit faucibus urna.</p>
+                  <p><img src="../img/demo/pix-002.jpg" alt="Pix 002"></p>
+                </div>
+                <h3>Section 3</h3>
+                <div>
+                  <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                  Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                  ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                  lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                  <p><img src="../img/demo/pix-003.jpg" alt="Pix 003"></p>
+                  <ul>
+                    <li>List item one</li>
+                    <li>List item two</li>
+                    <li>List item three</li>
+                  </ul>
+                </div>
+                <h3>Section 4</h3>
+                <div>
+                  <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                  et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                  faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                  mauris vel est.</p>
+                  <p><img src="../img/demo/pix-004.jpg" alt="Pix 004"></p>
+                  <p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                  inceptos himenaeos.</p>
+                </div>
+              </div>
+              <!-- /Component -->
+            </div>
+            <!-- /Demo -->
+          </div>
+        </div>
       </div>
-      <h3>Section 2</h3>
-      <div>
-        <p>
-        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-        suscipit faucibus urna.
-        </p>
+    </main>
+    <!-- /Main content -->
+
+    <!-- Footer -->
+    <footer class="patterns-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>Onigiri Patterns</strong></p>
+            <p>Designed and built with all the love in the world by ahomiya.com.<br> Maintained by <a href="mailto:&#104;&#097;&#116;&#115;&#117;&#107;&#111;&#105;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Hatsukoi</a> &amp; <a href="mailto:&#107;&#097;&#105;&#046;&#115;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Kai.S</a></p>
+            <p><small><a href="http://www.ahomiya.com">ahomiya.com</a> © 2015</small></p>
+          </div>
+        </div>
       </div>
-      <h3>Section 3</h3>
-      <div>
-        <p>
-        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-        </p>
-        <ul>
-          <li>List item one</li>
-          <li>List item two</li>
-          <li>List item three</li>
-        </ul>
-      </div>
-      <h3>Section 4</h3>
-      <div>
-        <p>
-        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-        mauris vel est.
-        </p>
-        <p>
-        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-        inceptos himenaeos.
-        </p>
-      </div>
-    </div>
+    </footer>
+    <!-- /Footer -->
 
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
@@ -80,12 +178,15 @@
     <script>
       $(document).ready(function() {
 
-        // Plugin     : jQuery UI - Accordion
-        // Widget     : https://jqueryui.com/accordion/
-        // API        : http://api.jqueryui.com/accordion/
-        // Repository : https://github.com/jquery/jquery-ui
+        /**
+         * Plugin        : jQuery UI - Accordion
+         * Documentation : https://jqueryui.com/accordion/
+         * API           : http://api.jqueryui.com/accordion/
+         * Repository    : https://github.com/jquery/jquery-ui
+         */
         $('#accordion').accordion({
-          collapsible: true
+          collapsible : true,
+          heightStyle : 'content'
         });
 
       });

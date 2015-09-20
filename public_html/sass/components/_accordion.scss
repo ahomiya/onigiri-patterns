@@ -4,8 +4,62 @@
 // Widget     : https://jqueryui.com/accordion/
 // API        : http://api.jqueryui.com/accordion/
 // Repository : https://github.com/jquery/jquery-ui
-// CSS prefix : .ui-accordion
+// CSS prefix : .ui-accordion-
 // -----------------------------------------------------------------------------
 
 // Vendor
 @import "./components/package/jquery.ui/themes/base/accordion";
+
+// Demo
+.ui-accordion {
+  // Header
+  .ui-accordion-header {
+    background-color: #ddd;
+    margin: 5px 0 0 0;
+    outline: none;
+    padding: .5rem .5rem;
+    &.ui-state-hover {
+      background-color: #bbb;
+    }
+    &.ui-state-active {
+      background-color: #0275d8;
+      color: #fff;
+      .ui-accordion-header-icon {
+        &:after {
+          border-color: transparent transparent #fff transparent;
+          border-width: 0 6px 6px 6px;
+        }
+      }
+    }
+
+    // Icon
+    .ui-accordion-header-icon {
+      height: 6px;
+      left: auto;
+      margin-top: -3px;
+      right: .5rem;
+      top: 50%;
+      width: 12px;
+      &:after {
+        border-color: #373a3c transparent transparent transparent;
+        border-style: solid;
+        border-width: 6px 6px 0 6px;
+        content: "";
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0;
+      }
+    }
+  }
+
+  // Content
+  .ui-accordion-content {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: 0;
+    padding: .5rem .5rem;
+  }
+}
