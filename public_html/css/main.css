@@ -1364,6 +1364,56 @@ mark,
   overflow: auto;
 }
 
+.ui-accordion .ui-accordion-header {
+  background-color: #ddd;
+  margin: 5px 0 0 0;
+  outline: none;
+  padding: 0.5rem 0.5rem;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-hover {
+  background-color: #bbb;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-active {
+  background-color: #0275d8;
+  color: #fff;
+}
+
+.ui-accordion .ui-accordion-header.ui-state-active .ui-accordion-header-icon:after {
+  border-color: transparent transparent #fff transparent;
+  border-width: 0 6px 6px 6px;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+  height: 6px;
+  left: auto;
+  margin-top: -3px;
+  right: .5rem;
+  top: 50%;
+  width: 12px;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon:after {
+  border-color: #373a3c transparent transparent transparent;
+  border-style: solid;
+  border-width: 6px 6px 0 6px;
+  content: "";
+  display: block;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+
+.ui-accordion .ui-accordion-content {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top: 0;
+  padding: 0.5rem 0.5rem;
+}
+
 /*!
  * jQuery UI Tabs 1.11.4
  * http://jqueryui.com
@@ -5364,7 +5414,7 @@ mark,
 
 .patterns-table th {
   font-weight: normal;
-  width: 135px;
+  width: 160px;
 }
 
 .patterns-table td > i {
