@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Slider / Carousel · Components · ahomiya.com</title>
+    <title>Slider / Carousel · Onigiri</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
@@ -13,26 +13,107 @@
     <script src="../js/vendor/libraries.features.js"></script>
   </head>
   <body>
-    <h1>Slider / Carousel</h1>
-    <ul>
-      <li>Prototype: slick.js</li>
-      <li>Bower: slick.js</li>
-      <li><a href="http://kenwheeler.github.io/slick/" target="_blank">Documentation</a></li>
-      <li><a href="https://github.com/kenwheeler/slick/" target="_blank">Repository</a></li>
-    </ul>
-
-    <div style="background-color: #3498db; margin: 0 auto; padding: 0 50px; width: 80%;">
-
-      <div id="slider">
-        <div><img src="http://farm1.staticflickr.com/291/18653638823_a86b58523c_m.jpg" alt=""></div>
-        <div><img src="http://farm4.staticflickr.com/3826/18875570170_e20cf27a4d_m.jpg" alt=""></div>
-        <div><img src="http://farm1.staticflickr.com/471/19102574835_d5a7837217_m.jpg" alt=""></div>
-        <div><img src="http://farm1.staticflickr.com/288/19353466834_6be3600330_m.jpg" alt=""></div>
-        <div><img src="http://farm1.staticflickr.com/313/19831416459_5ddd26103e_m.jpg" alt=""></div>
-        <div><img src="http://farm6.staticflickr.com/5444/17679973232_568353a624_m.jpg" alt=""></div>
+    <!-- Header -->
+    <header class="patterns-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <nav>
+              <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="http://github.com/ahomiya/patterns-patterns" target="_blank">GitHub</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-6">
+            <div class="nav-meta">おにぎり Patterns</div>
+          </div>
+        </div>
       </div>
+    </header>
+    <!-- /Header -->
 
-    </div>
+    <!-- Main content -->
+    <main class="patterns-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Headset -->
+            <div class="patterns-headset">
+              <h1 class="patterns-title">Slider / Carousel <sup class="ture">jQuery</sup> <sup class="true">CSS</sup> </h1>
+              <table class="patterns-table">
+                <tbody>
+                  <tr>
+                    <th scope="col">Plugin</th>
+                    <td><i>:</i>slick.js</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required library</th>
+                    <td><i>:</i>jQuery</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required CSS</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Theme</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Documentation</th>
+                    <td><i>:</i><a href="http://kenwheeler.github.io/slick/" target="_blank">http://kenwheeler.github.io/slick/</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Repository</th>
+                    <td><i>:</i><a href="https://github.com/kenwheeler/slick/" target="_blank">https://github.com/kenwheeler/slick/</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Bower</th>
+                    <td><i>:</i><code>bower install slick.js --save</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Last updated</th>
+                    <td><i>:</i>2015.09.20 by me@ahomiya.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /Headset -->
+
+            <!-- Demo -->
+            <div class="patterns-demo">
+              <h2>Demo</h2>
+              <div style="padding: 0 30px;">
+                <div id="slider">
+                  <div><img src="../img/demo/pix-001.jpg" alt=""></div>
+                  <div><img src="../img/demo/pix-002.jpg" alt=""></div>
+                  <div><img src="../img/demo/pix-003.jpg" alt=""></div>
+                  <div><img src="../img/demo/pix-004.jpg" alt=""></div>
+                  <div><img src="../img/demo/pix-005.jpg" alt=""></div>
+                  <div><img src="../img/demo/pix-006.jpg" alt=""></div>
+                </div>
+              </div>
+            </div>
+            <!-- /Demo -->
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- /Main content -->
+
+    <!-- Footer -->
+    <footer class="patterns-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>Onigiri Patterns</strong></p>
+            <p>Designed and built with all the love in the world by ahomiya.com.<br> Maintained by <a href="mailto:&#104;&#097;&#116;&#115;&#117;&#107;&#111;&#105;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Hatsukoi</a> &amp; <a href="mailto:&#107;&#097;&#105;&#046;&#115;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Kai.S</a></p>
+            <p><small><a href="http://www.ahomiya.com">ahomiya.com</a> © 2015</small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- /Footer -->
 
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
@@ -43,14 +124,17 @@
     <script>
       $(document).ready(function() {
 
-        // Plugin        : slick.js
-        // Documentation : http://kenwheeler.github.io/slick/
-        // Repository    : https://github.com/kenwheeler/slick/
+        /**
+         * Plugin        : slick.js
+         * Documentation : http://kenwheeler.github.io/slick/
+         * Repository    : https://github.com/kenwheeler/slick/
+         */
         $('#slider').slick({
           dots           : true,
           infinite       : true,
           slidesToShow   : 3,
-          slidesToScroll : 1
+          slidesToScroll : 1,
+          centerMode     : true
         });
 
       });
