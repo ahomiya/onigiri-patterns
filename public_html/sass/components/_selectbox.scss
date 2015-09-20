@@ -1,10 +1,15 @@
 // Select boxes
 
-// Plugin        : jScrollPane
-// Documentation : http://jscrollpane.kelvinluck.com
-// Repository    : https://github.com/vitch/jScrollPane
+// Plugin        : Select2
+// Documentation : https://select2.github.io
+// Repository    : https://github.com/select2/select2
 // CSS prefix    : .select2-
 // -----------------------------------------------------------------------------
 
 // Vendor
 @import "./components/package/select2/dist/css/select2";
+
+// Demo
+.select2-container--default .select2-selection--single {
+  outline: none;
+}
