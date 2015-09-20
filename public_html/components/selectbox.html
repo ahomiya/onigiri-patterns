@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Select boxes · Components · ahomiya.com</title>
+    <title>Select boxes · Onigiri</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
@@ -13,22 +13,117 @@
     <script src="../js/vendor/libraries.features.js"></script>
   </head>
   <body>
-    <h1>Select boxes</h1>
-    <ul>
-      <li>Prototype: Select2</li>
-      <li>Bower: select2</li>
-      <li><a href="https://select2.github.io" target="_blank">Documentation</a></li>
-      <li><a href="https://github.com/select2/select2" target="_blank">Repository</a></li>
-    </ul>
+    <!-- Header -->
+    <header class="patterns-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <nav>
+              <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="http://github.com/ahomiya/patterns-patterns" target="_blank">GitHub</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-6">
+            <div class="nav-meta">おにぎり Patterns</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- /Header -->
 
-    <select id="selectbox">
-      <option value="0" selected>Option 0</option>
-      <option value="1">Option 1 - Chiang Mai</option>
-      <option value="2">Option 2 - Bangkok</option>
-      <option value="3">Option 3 - Yokohama</option>
-      <option value="4">Option 4 - United Kingdom</option>
-      <option value="5">Haniba</option>
-    </select>
+    <!-- Main content -->
+    <main class="patterns-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <!-- Headset -->
+            <div class="patterns-headset">
+              <h1 class="patterns-title">Select boxes <sup class="ture">jQuery</sup> <sup class="true">CSS</sup></h1>
+              <table class="patterns-table">
+                <tbody>
+                  <tr>
+                    <th scope="col">Plugin</th>
+                    <td><i>:</i>Select2</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required library</th>
+                    <td><i>:</i>jQuery</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Required CSS</th>
+                    <td><i>:</i><code>true</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Responsiveness</th>
+                    <td><i>:</i><code>false</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Documentation</th>
+                    <td><i>:</i><a href="https://select2.github.io" target="_blank">https://select2.github.io</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Repository</th>
+                    <td><i>:</i><a href="https://github.com/select2/select2" target="_blank">https://github.com/select2/select2</a></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Bower</th>
+                    <td><i>:</i><code>bower install select2 --save</code></td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Version</th>
+                    <td><i>:</i>4.0.0</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Last updated</th>
+                    <td><i>:</i>2015.09.20 by me@ahomiya.com</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /Headset -->
+
+            <!-- Demo -->
+            <div class="patterns-demo">
+              <h2>Demo</h2>
+
+              <div style="margin-bottom: 25px">
+              <!-- Component -->
+              <select id="selectbox" style="width: 200px">
+                <option value="0" selected>Option 0</option>
+                <option value="1">Option 1 - Chiang Mai</option>
+                <option value="2">Option 2 - Bangkok</option>
+                <option value="3">Option 3 - Yokohama</option>
+                <option value="4">Option 4 - UK</option>
+              </select>
+              <!-- /Component -->
+              </div>
+
+              <!-- Demo helper -->
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <!-- /Demo helper -->
+            </div>
+            <!-- /Demo -->
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- /Main content -->
+
+    <!-- Footer -->
+    <footer class="patterns-footer" role="contentinfo">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p><strong>Onigiri Patterns</strong></p>
+            <p>Designed and built with all the love in the world by ahomiya.com.<br> Maintained by <a href="mailto:&#104;&#097;&#116;&#115;&#117;&#107;&#111;&#105;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Hatsukoi</a> &amp; <a href="mailto:&#107;&#097;&#105;&#046;&#115;&#064;&#097;&#104;&#111;&#109;&#105;&#121;&#097;&#046;&#099;&#111;&#109;">Kai.S</a></p>
+            <p><small><a href="http://www.ahomiya.com">ahomiya.com</a> © 2015</small></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- /Footer -->
 
     <!-- JavaScript -->
     <!--[if lt IE 10]><script src="../js/vendor/libraries.polyfills.js"></script><![endif]-->
@@ -39,9 +134,11 @@
     <script>
       $(document).ready(function() {
 
-        // Plugin        : jScrollPane
-        // Documentation : http://jscrollpane.kelvinluck.com
-        // Repository    : https://github.com/vitch/jScrollPane
+        /**
+         * Plugin        : Select2
+         * Documentation : https://select2.github.io
+         * Repository    : https://github.com/select2/select2
+         */
         $('#selectbox').select2({
           minimumResultsForSearch: Infinity
         });
