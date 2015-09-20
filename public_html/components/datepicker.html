@@ -111,6 +111,7 @@
 
               <h3>Display inline</h3>
               <p>Date: <div id="datepicker-inline"></div></p>
+              <input type="hidden" id="datepicker-altfield">
               <!-- /Component -->
 
             </div>
@@ -155,7 +156,9 @@
         $('#datepicker-default').datepicker();
 
         // Display inline
-        $('#datepicker-inline').datepicker();
+        $('#datepicker-inline').datepicker({
+          altField : '#datepicker-altfield'
+        });
 
       });
     </script>
