@@ -1474,6 +1474,44 @@ mark,
   background: none;
 }
 
+.ui-tabs {
+  padding: 0;
+}
+
+.ui-tabs .ui-tabs-nav {
+  border-bottom: 1px solid #aaa;
+  padding: 0;
+}
+
+.ui-tabs .ui-tabs-nav li {
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  border-bottom-width: 0;
+  margin: 0 0.2rem 0 0;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-state-hover,
+.ui-tabs .ui-tabs-nav li.ui-state-active {
+  border-color: #aaa;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-state-hover {
+  background-color: #e6e6e6;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-state-hover.ui-state-active {
+  background-color: #fff;
+}
+
+.ui-tabs .ui-tabs-anchor {
+  outline: none;
+  padding: 0.5rem 1rem;
+}
+
+.ui-tabs .ui-tabs-panel {
+  padding: 1rem 0 0.5rem 0;
+}
+
 /*!
  * jQuery UI Datepicker 1.11.4
  * http://jqueryui.com

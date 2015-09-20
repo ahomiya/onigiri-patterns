@@ -4,8 +4,45 @@
 // Widget     : https://jqueryui.com/tabs/
 // API        : http://api.jqueryui.com/tabs/
 // Repository : https://github.com/jquery/jquery-ui
-// CSS prefix : .ui-tabs
+// CSS prefix : .ui-tabs-
 // -----------------------------------------------------------------------------
 
 // Vendor
 @import "./components/package/jquery.ui/themes/base/tabs";
+
+// Demo
+.ui-tabs {
+  padding: 0;
+
+  // Nav
+  .ui-tabs-nav {
+    border-bottom: 1px solid #aaa;
+    padding: 0;
+    li {
+      background-color: #fff;
+      border: 1px solid #d3d3d3;
+      border-bottom-width: 0;
+      margin: 0 .2rem 0 0;
+      &.ui-state-hover,
+      &.ui-state-active {
+        border-color: #aaa;
+      }
+      &.ui-state-hover {
+        background-color: #e6e6e6;
+        &.ui-state-active {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  .ui-tabs-anchor {
+    outline: none;
+    padding: .5rem 1rem;
+  }
+
+  // Panel
+  .ui-tabs-panel {
+    padding: 1rem 0 .5rem 0;
+  }
+}
