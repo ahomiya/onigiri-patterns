@@ -5396,11 +5396,11 @@ mark,
 }
 
 .patterns-header .nav-menu a {
-  color: #fff;
+  color: #cdbfe3;
 }
 
 .patterns-header .nav-menu a:hover {
-  color: #cdbfe3;
+  color: #fff;
   text-decoration: none;
 }
 
