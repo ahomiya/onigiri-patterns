@@ -5535,6 +5535,10 @@ mark,
   color: #1c86ee;
 }
 
+.is-preparing {
+  color: orange;
+}
+
 .is-inprogress {
   color: green;
 }
