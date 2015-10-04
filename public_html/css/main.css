@@ -685,36 +685,41 @@ input[type="search"] {
   top: 0;
   color: #666;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 1rem;
   opacity: 1;
+  text-transform: none;
 }
 
 ::-moz-placeholder {
   color: #666;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 1rem;
   opacity: 1;
+  text-transform: none;
 }
 
 :-moz-placeholder {
   color: #666;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 1rem;
   opacity: 1;
+  text-transform: none;
 }
 
 input:-ms-input-placeholder {
   color: #666;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 1rem;
   opacity: 1;
+  text-transform: none;
 }
 
 [placeholder].placeholder {
   color: #666;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 1rem;
   opacity: 1;
+  text-transform: none;
 }
 
 ::-moz-selection {
