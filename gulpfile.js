@@ -101,7 +101,8 @@ var components      = {
       componentPackage + '/jquery.scrollTo/jquery.scrollTo.js',
       componentPackage + '/animsition/dist/js/jquery.animsition.js',
       componentPackage + '/matchheight/jquery.matchHeight.js',
-      componentPackage + '/sticky/jquery.sticky.js'
+      componentPackage + '/sticky/jquery.sticky.js',
+      componentPackage + '/jQuery.mmenu/dist/core/js/jquery.mmenu.min.all.js'
     ]
   }
 
