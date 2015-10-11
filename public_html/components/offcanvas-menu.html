@@ -16,7 +16,7 @@
     <!-- Page wrapper -->
     <div>
       <!-- Header -->
-      <header class="patterns-header">
+      <header class="patterns-header offcanvas-fixed">
         <div class="container">
           <div class="row">
             <div class="col-6">
@@ -148,9 +148,24 @@
          * Documentation : http://mmenu.frebsite.nl
          * Repository    : https://github.com/BeSite/jQuery.mmenu
          */
+
         $('#offcanvas-menu').mmenu({
+          // Options
+
+          // Off-canvas
+          // http://mmenu.frebsite.nl/documentation/addons/off-canvas.html
           offCanvas: {
             position: 'left'
+          }
+        }, {
+          // Configuration
+          classNames: {
+
+            // Fixed elements
+            // http://mmenu.frebsite.nl/documentation/addons/fixed-elements.html
+            fixedElements: {
+              fixed: 'offcanvas-fixed'
+            }
           }
         });
 
